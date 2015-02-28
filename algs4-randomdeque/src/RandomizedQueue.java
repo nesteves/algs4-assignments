@@ -1,12 +1,23 @@
 import java.util.Iterator;
 
-
+/**
+ * 
+ * @author nunoe
+ * Implements a queue that returns elements in a random order
+ * 
+ * @param <Item> generic implementation, accepts any type of object
+ */
 public class RandomizedQueue<Item> implements Iterable<Item> {
   
+  private Item[] q;
   private int totalItems;
   
+  /**
+   * Initialize the RandomizedQueue
+   */
+  @SuppressWarnings("unchecked") // suppresses the warning on the unchecked cast from Object to <Item>
   public RandomizedQueue() {
-    
+    q = (Item[]) new Object[1];
     totalItems = 0;
   }
   
