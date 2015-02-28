@@ -64,6 +64,7 @@ public class Deque<Item> implements Iterable<Item> {
    * @return the item in front of the queue
    */
   public Item removeFirst() {
+    if (size == 0) throw new java.util.NoSuchElementException();
     Item returnVal = first.value;
     
     first = first.next;
@@ -78,6 +79,7 @@ public class Deque<Item> implements Iterable<Item> {
    * @return the item at the back of the queue
    */
   public Item removeLast() {
+    if (size == 0) throw new java.util.NoSuchElementException();
     Item returnVal = last.value;
     
     last = last.previous;
