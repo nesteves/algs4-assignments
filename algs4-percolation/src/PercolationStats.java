@@ -5,7 +5,7 @@ public class PercolationStats {
   private int nTests;
   private int[] openSites;
   private double[] threshold;
-  private Percolation percolation_test;
+  private Percolation percolationTest;
 
   /**
    * Constructor used to perform t independent tests on a n-by-b grid
@@ -34,14 +34,14 @@ public class PercolationStats {
 
     // Perform the tests
     for (int i = 0; i < nTests; i++) {
-      percolation_test = new Percolation(n);
+      percolationTest = new Percolation(n);
       StdRandom.shuffle(siteQueue);
       counter = 0;
 
-      while (!percolation_test.percolates()) {
+      while (!percolationTest.percolates()) {
         r = rowFromIndex(siteQueue[counter]);
         c = columnFromIndex(siteQueue[counter]);
-        percolation_test.open(r, c);
+        percolationTest.open(r, c);
         counter++;
       }
 
