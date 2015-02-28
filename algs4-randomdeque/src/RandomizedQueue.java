@@ -25,12 +25,16 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   }
   
   public Item dequeue() {
+    if (totalItems == 0) throw new java.util.NoSuchElementException();
+    
     totalItems--;
     
     return null;
   }
   
   public Item sample() {
+    if (totalItems == 0) throw new java.util.NoSuchElementException();
+    
     return null;
   }
   
