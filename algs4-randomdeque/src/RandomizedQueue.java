@@ -75,7 +75,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   public Item sample() {
     if (totalItems == 0) throw new java.util.NoSuchElementException();
     
-    return null;
+    return q[StdRandom.uniform(totalItems)];
   }
   
   /**
@@ -83,7 +83,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
    * @param newSize the new size of the queue.
    */
   private void resize(int newSize) {
-    @SuppressWarnings("unchecked")
     Item[] copy = (Item[]) new Object[newSize];
     
     for (int i = 0; i < totalItems; i++)
