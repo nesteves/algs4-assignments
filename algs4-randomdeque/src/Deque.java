@@ -5,6 +5,8 @@ import java.util.Iterator;
  * Implementation of a double-ended queue - generalizes a stack and
  * a queue, supporting add and remove operations at the front and
  * back.
+ * 
+ * @author Nuno Esteves
  *
  * @param <Item> Generic type. Allows the use of the Deque with
  * any type

@@ -1,9 +1,8 @@
 import java.util.Iterator;
 
 /**
- * 
- * @author nunoe
  * Implements a queue that returns elements in a random order.
+ * @author Nuno Esteves
  * 
  * @param <Item> generic implementation, accepts any type of object.
  */
