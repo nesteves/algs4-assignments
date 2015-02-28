@@ -45,7 +45,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     if (item == null) throw new java.lang.NullPointerException();
     
     if (totalItems == q.length) resize(2 * totalItems);
-    
     q[totalItems++] = item;
   }
   
@@ -58,9 +57,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   public Item dequeue() {
     if (totalItems == 0) throw new java.util.NoSuchElementException();
     
-    totalItems--;
-    
-    return null;
+    Item item = q[--totalItems];
+    q[totalItems] = null;
+    if (totalItems > 0 && totalItems == q.length / 4) resize(totalItems / 2);
+    return item;
   }
   
   /**
