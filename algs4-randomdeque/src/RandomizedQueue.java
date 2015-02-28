@@ -92,6 +92,13 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     return new RQIterator<Item>();
   }
   
+  /**
+   * Iterator that returns elements from the RandomizedQueue
+   * in random order.
+   * @author Nuno Esteves
+   *
+   * @param <Item>
+   */
   private class RQIterator<Item> implements Iterator<Item> {
     private int current;
     private int[] sequence;
