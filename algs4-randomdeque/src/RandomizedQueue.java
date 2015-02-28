@@ -90,7 +90,33 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   }
   
   public Iterator<Item> iterator() {
-    return null;
+    return new RQIterator<Item>();
+  }
+  
+  private class RQIterator<Item> implements Iterator<Item> {
+    private int current;
+    
+    public RQIterator() {
+      current = 0;
+    }
+    
+    @Override
+    public boolean hasNext() {
+      return current < totalItems;
+    }
+
+    @Override
+    public Item next() {
+      if (!hasNext()) throw new java.util.NoSuchElementException();
+      
+      Item value = (Item) q[current];
+      current++;
+      return value;
+    }
+    
+    @Override
+    public void remove() { throw new java.lang.UnsupportedOperationException(); }
+    
   }
   
   /** 
@@ -110,6 +136,21 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     System.out.println("Queue size after removing 1 item: " + testRQueue.size());
     testRQueue .dequeue();
     System.out.println("Is the queue empty after removing the last item? " + testRQueue.isEmpty());
+    
+    testRQueue.enqueue(1);
+    testRQueue.enqueue(2);
+    testRQueue.enqueue(1);
+    testRQueue.enqueue(2);
+    testRQueue.enqueue(1);
+    testRQueue.enqueue(2);
+    testRQueue.enqueue(1);
+    testRQueue.enqueue(2);
+    testRQueue.enqueue(1);
+    testRQueue.enqueue(2);
+    System.out.println("Print all the elements in order to test the regular iterator:\n");
+    for (int i : testRQueue) {
+      System.out.print(" " + i);
+    }
     
   }
   
