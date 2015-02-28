@@ -56,6 +56,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   public Item dequeue() {
     if (totalItems == 0) throw new java.util.NoSuchElementException();
     
+    // Pick a random position in the queue and swap it to the end
+    int pos = StdRandom.uniform(totalItems);
+    exchange(pos, totalItems - 1);
+    
     Item item = q[--totalItems];
     q[totalItems] = null;
     if (totalItems > 0 && totalItems == q.length / 4) resize(totalItems / 2);
@@ -181,7 +185,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     }
     
     System.out.println();
-    System.out.println("Test removing 3 items and running the iterator again.\n");
+    System.out.println("\nTest removing 3 items and running the iterator again.\n");
     testRQueue .dequeue();
     testRQueue .dequeue();
     testRQueue .dequeue();
