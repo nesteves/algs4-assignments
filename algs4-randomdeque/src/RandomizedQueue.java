@@ -88,6 +88,20 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     q = copy;
   }
   
+  /**
+   * Method used to swap 2 elements in the
+   * queue.
+   * @param a position of the first element.
+   * @param b position of the second element.
+   */
+  private void exchange(int a, int b) {
+    Item temp;
+    
+    temp = q[a];
+    q[a] = q[b];
+    q[b] = temp;
+  }
+  
   public Iterator<Item> iterator() {
     return new RQIterator<Item>();
   }
