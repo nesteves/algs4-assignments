@@ -3,9 +3,9 @@ import java.util.Iterator;
 /**
  * 
  * @author nunoe
- * Implements a queue that returns elements in a random order
+ * Implements a queue that returns elements in a random order.
  * 
- * @param <Item> generic implementation, accepts any type of object
+ * @param <Item> generic implementation, accepts any type of object.
  */
 public class RandomizedQueue<Item> implements Iterable<Item> {
   
@@ -13,7 +13,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   private int totalItems;
   
   /**
-   * Initialize the RandomizedQueue
+   * Initialize the RandomizedQueue.
    */
   @SuppressWarnings("unchecked") // suppresses the warning on the unchecked cast from Object to <Item>
   public RandomizedQueue() {
@@ -21,20 +21,38 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     totalItems = 0;
   }
   
+  /**
+   * Method used to ask whether the queue is empty.
+   * @return true if it is empty, false otherwise.
+   */
   public boolean isEmpty() {
     return totalItems == 0;
   }
   
+  /**
+   * Method used to get the current size of the queue.
+   * @return The current size of the queue.
+   */
   public int size() {
     return totalItems;
   }
   
+  /**
+   * Method used to add an item to the queue.
+   * @param item Item to be added to the queue.
+   */
   public void enqueue(Item item) {
     if (item == null) throw new java.lang.NullPointerException();
     
     totalItems++;
   }
   
+  /**
+   * Method used to remove and return a random item from
+   * the queue.
+   * @return a random item contained in the queue. All
+   *    calls are independent.
+   */
   public Item dequeue() {
     if (totalItems == 0) throw new java.util.NoSuchElementException();
     
@@ -43,6 +61,12 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     return null;
   }
   
+  /**
+   * Method used to get a random item from the queue.
+   * @return a random item contained in the queue. All calls are
+   *    independent - the same item can be returned twice in a
+   *    row.
+   */
   public Item sample() {
     if (totalItems == 0) throw new java.util.NoSuchElementException();
     
@@ -53,6 +77,10 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     return null;
   }
   
+  /** 
+   * Basic tests for the class ensure the API works correctly.
+   * @param args command-line arguments are not used.
+   */
   public static void main(String[] args) {
     
     RandomizedQueue<Integer> testRQueue = new RandomizedQueue<Integer>();
