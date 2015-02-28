@@ -13,9 +13,9 @@ import java.util.Iterator;
  */
 public class Deque<Item> implements Iterable<Item> {
   
-  Node<Item> first;
-  Node<Item> last;
-  int size = 0;
+  private Node<Item> first;
+  private Node<Item> last;
+  private int size = 0;
   
   public Deque() {
     first = null;
@@ -108,7 +108,7 @@ public class Deque<Item> implements Iterable<Item> {
    *
    * @param <E> Generic type
    */
-  public class DequeIterator<Item> implements Iterator<Item> {
+  private class DequeIterator<Item> implements Iterator<Item> {
     
     private Node<Item> current;
     
