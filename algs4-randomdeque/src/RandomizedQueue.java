@@ -94,8 +94,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   
   private class RQIterator<Item> implements Iterator<Item> {
     private int current;
+    private int[] sequence;
     
     public RQIterator() {
+      // Initialize an array where a[i] = i and shuffle the items
+      sequence = new int[totalItems];
+      for (int i = 0; i < totalItems; i++) 
+        sequence[i] = i;
+      StdRandom.shuffle(sequence);
       current = 0;
     }
     
@@ -108,7 +114,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     public Item next() {
       if (!hasNext()) throw new java.util.NoSuchElementException();
       
-      Item value = (Item) q[current];
+      Item value = (Item) q[sequence[current]];
       current++;
       return value;
     }
@@ -138,15 +144,15 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     
     testRQueue.enqueue(1);
     testRQueue.enqueue(2);
-    testRQueue.enqueue(1);
-    testRQueue.enqueue(2);
-    testRQueue.enqueue(1);
-    testRQueue.enqueue(2);
-    testRQueue.enqueue(1);
-    testRQueue.enqueue(2);
-    testRQueue.enqueue(1);
-    testRQueue.enqueue(2);
-    System.out.println("Print all the elements in order to test the regular iterator:\n");
+    testRQueue.enqueue(3);
+    testRQueue.enqueue(4);
+    testRQueue.enqueue(5);
+    testRQueue.enqueue(6);
+    testRQueue.enqueue(7);
+    testRQueue.enqueue(8);
+    testRQueue.enqueue(9);
+    testRQueue.enqueue(10);
+    System.out.println("Print all the elements in order to test the iterator:\n");
     for (int i : testRQueue) {
       System.out.print(" " + i);
     }
