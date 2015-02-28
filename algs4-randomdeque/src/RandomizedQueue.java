@@ -73,6 +73,20 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     return null;
   }
   
+  /**
+   * Resizes the array holding the queue.
+   * @param newSize the new size of the queue.
+   */
+  private void resize(int newSize) {
+    @SuppressWarnings("unchecked")
+    Item[] copy = (Item[]) new Object[newSize];
+    
+    for (int i = 0; i < totalItems; i++)
+      copy[i] = q[i];
+    
+    q = copy;
+  }
+  
   public Iterator<Item> iterator() {
     return null;
   }
