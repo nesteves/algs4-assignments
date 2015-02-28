@@ -139,6 +139,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     
     RandomizedQueue<Integer> testRQueue = new RandomizedQueue<Integer>();
     
+    // Test simple operations
     System.out.println("Is the queue empty? " + testRQueue.isEmpty());
     testRQueue.enqueue(1);
     testRQueue.enqueue(2);
@@ -149,6 +150,7 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
     testRQueue .dequeue();
     System.out.println("Is the queue empty after removing the last item? " + testRQueue.isEmpty());
     
+    // Test the iterator
     testRQueue.enqueue(1);
     testRQueue.enqueue(2);
     testRQueue.enqueue(3);
@@ -164,6 +166,14 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
       System.out.print(" " + i);
     }
     
+    System.out.println();
+    System.out.println("Test removing 3 items and running the iterator again.\n");
+    testRQueue .dequeue();
+    testRQueue .dequeue();
+    testRQueue .dequeue();
+    for (int i : testRQueue) {
+      System.out.print(" " + i);
+    }
   }
   
   
