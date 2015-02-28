@@ -14,7 +14,6 @@ public class RandomizedQueue<Item> implements Iterable<Item> {
   /**
    * Initialize the RandomizedQueue.
    */
-  @SuppressWarnings("unchecked") // suppresses the warning on the unchecked cast from Object to <Item>
   public RandomizedQueue() {
     q = (Item[]) new Object[1];
     totalItems = 0;
