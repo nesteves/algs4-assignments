@@ -2,7 +2,7 @@ public class Percolation {
 
   private int n;
   private WeightedQuickUnionUF uf;
-  private WeightedQuickUnionUF uf_backwash;
+  private WeightedQuickUnionUF ufBackwash;
   private int[] grid;
 
   /**
@@ -15,7 +15,7 @@ public class Percolation {
 
     this.n = n;
     uf = new WeightedQuickUnionUF(n * n + 2);
-    uf_backwash = new WeightedQuickUnionUF(n * n + 1);
+    ufBackwash = new WeightedQuickUnionUF(n * n + 1);
     grid = new int[n * n];
 
     for (int i = 0; i < n * n; i++) {
@@ -73,7 +73,7 @@ public class Percolation {
 
     int position = convertCoordinates(i, j);
 
-    return uf_backwash.connected(position, n * n);
+    return ufBackwash.connected(position, n * n);
   }
 
   /**
@@ -121,11 +121,11 @@ public class Percolation {
     if (p >= n) {
       if (isOpen(p - n)) {
         uf.union(p, p - n);
-        uf_backwash.union(p, p - n);
+        ufBackwash.union(p, p - n);
       }
     } else {
       uf.union(p, n * n);
-      uf_backwash.union(p, n * n);
+      ufBackwash.union(p, n * n);
     }
   }
 
@@ -139,7 +139,7 @@ public class Percolation {
     if (p < n * (n - 1)) {
       if (isOpen(p + n)) {
         uf.union(p, p + n);
-        uf_backwash.union(p, p + n);
+        ufBackwash.union(p, p + n);
       }
     } else
       uf.union(p, n * n + 1);
@@ -155,7 +155,7 @@ public class Percolation {
     if (p % n != 0) {
       if (isOpen(p - 1)) {
         uf.union(p, p - 1);
-        uf_backwash.union(p, p - 1);
+        ufBackwash.union(p, p - 1);
       }
     }
   }
@@ -171,7 +171,7 @@ public class Percolation {
     if ((p + 1) % n != 0) {
       if (isOpen(p + 1)) {
         uf.union(p, p + 1);
-        uf_backwash.union(p, p + 1);
+        ufBackwash.union(p, p + 1);
       }
     }
   }
