@@ -5,7 +5,7 @@ public class PercolationStats {
   private int nTests;
   private int[] openSites;
   private double[] threshold;
-  private Percolation percolationTest;
+  
 
   /**
    * Constructor used to perform t independent tests on a n-by-b grid
@@ -15,7 +15,9 @@ public class PercolationStats {
   public PercolationStats(int n, int t) {
     if (n < 1 || t < 1)
       throw new java.lang.IllegalArgumentException();
-
+    
+    Percolation percolationTest;
+    
     this.n = n;
     gridSize = n * n;
     nTests = t;
