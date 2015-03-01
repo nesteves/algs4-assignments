@@ -116,7 +116,7 @@ public class Percolation {
    * @param p the position of the node
    */
   private void unionAbove(int p) {
-    if (p > n) {
+    if (p >= n) {
       if (isOpen(p - n))
         uf.union(p, p - n);
     } else
@@ -182,5 +182,28 @@ public class Percolation {
     System.out.println("Is the (2, 2) node full? " + p.isFull(2, 2));
     System.out.println("Is the (2, 1) node full? " + p.isFull(2, 1));
     System.out.println("Is the (3, 3) node full? " + p.isFull(3, 3));
+    
+    System.out.println("\n\nNew Percolation Grid:");
+    
+    p = new Percolation(10);
+    
+    p.open(2, 1);
+    p.open(3, 1);
+    p.open(4, 1);
+    p.open(5, 1);
+    p.open(6, 1);
+    p.open(7, 1);
+    p.open(8, 1);
+    p.open(9, 1);
+    p.open(10, 1);
+    int counter = 0;
+    for (int i : p.grid) {
+      if (counter++ % 10 == 0) System.out.print("\n");
+      System.out.print(" " + i);
+    }
+    
+    System.out.println("\n\nIs the (1, 1) node open? " + p.isOpen(1, 1));
+    System.out.println("Is the (2, 1) node full? " + p.isFull(2, 1));
+    System.out.println("Is the (3, 1) node full? " + p.isFull(3, 1));
   }
 }
