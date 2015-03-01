@@ -2,6 +2,7 @@ public class Percolation {
 
   private int n;
   private WeightedQuickUnionUF uf;
+  private WeightedQuickUnionUF uf_backwash;
   private int[] grid;
 
   /**
@@ -14,6 +15,7 @@ public class Percolation {
 
     this.n = n;
     uf = new WeightedQuickUnionUF(n * n + 2);
+    uf_backwash = new WeightedQuickUnionUF(n * n + 1);
     grid = new int[n * n];
 
     for (int i = 0; i < n * n; i++) {
@@ -71,7 +73,7 @@ public class Percolation {
 
     int position = convertCoordinates(i, j);
 
-    return uf.connected(position, n * n);
+    return uf_backwash.connected(position, n * n);
   }
 
   /**
@@ -117,10 +119,14 @@ public class Percolation {
    */
   private void unionAbove(int p) {
     if (p >= n) {
-      if (isOpen(p - n))
+      if (isOpen(p - n)) {
         uf.union(p, p - n);
-    } else
+        uf_backwash.union(p, p - n);
+      }
+    } else {
       uf.union(p, n * n);
+      uf_backwash.union(p, n * n);
+    }
   }
 
   /**
@@ -131,8 +137,10 @@ public class Percolation {
    */
   private void unionBelow(int p) {
     if (p < n * (n - 1)) {
-      if (isOpen(p + n))
+      if (isOpen(p + n)) {
         uf.union(p, p + n);
+        uf_backwash.union(p, p + n);
+      }
     } else
       uf.union(p, n * n + 1);
   }
@@ -145,8 +153,10 @@ public class Percolation {
    */
   private void unionLeft(int p) {
     if (p % n != 0) {
-      if (isOpen(p - 1))
+      if (isOpen(p - 1)) {
         uf.union(p, p - 1);
+        uf_backwash.union(p, p - 1);
+      }
     }
   }
 
@@ -159,8 +169,10 @@ public class Percolation {
    */
   private void unionRight(int p) {
     if ((p + 1) % n != 0) {
-      if (isOpen(p + 1))
+      if (isOpen(p + 1)) {
         uf.union(p, p + 1);
+        uf_backwash.union(p, p + 1);
+      }
     }
   }
 
@@ -187,6 +199,7 @@ public class Percolation {
     
     p = new Percolation(10);
     
+    p.open(1, 1);
     p.open(2, 1);
     p.open(3, 1);
     p.open(4, 1);
@@ -196,6 +209,7 @@ public class Percolation {
     p.open(8, 1);
     p.open(9, 1);
     p.open(10, 1);
+    p.open(10, 3);
     int counter = 0;
     for (int i : p.grid) {
       if (counter++ % 10 == 0) System.out.print("\n");
@@ -205,5 +219,6 @@ public class Percolation {
     System.out.println("\n\nIs the (1, 1) node open? " + p.isOpen(1, 1));
     System.out.println("Is the (2, 1) node full? " + p.isFull(2, 1));
     System.out.println("Is the (3, 1) node full? " + p.isFull(3, 1));
+    System.out.println("Is the (10, 3) node full? " + p.isFull(10, 3));
   }
 }
