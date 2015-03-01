@@ -15,15 +15,16 @@ public class Deque<Item> implements Iterable<Item> {
   
   private Node<Item> first;
   private Node<Item> last;
-  private int size = 0;
+  private int size;
   
   public Deque() {
     first = null;
     last = null;
+    size = 0;
   }
   
   public boolean isEmpty() {
-    return first == null;
+    return size == 0;
   }
   
   public int size() {
@@ -39,7 +40,9 @@ public class Deque<Item> implements Iterable<Item> {
     newNode.previous = null;
     first = newNode;
     
-    if (size == 0) last = newNode;
+    if (size == 0) {
+      last = newNode;
+    }
     else newNode.next.previous = newNode;
     size++;
   }
@@ -53,7 +56,9 @@ public class Deque<Item> implements Iterable<Item> {
     newNode.previous = last;
     last = newNode;
     
-    if (size == 0) first = newNode;
+    if (size == 0) {
+      first = newNode;
+    }
     else newNode.previous.next = newNode;
     
     size++;
@@ -161,5 +166,14 @@ public class Deque<Item> implements Iterable<Item> {
     for (int i : testDq) {
       System.out.print(" " + i);
     }
+    
+    System.out.println("\n\nTest adding and removing:");
+    testDq = new Deque<Integer>();
+    testDq.addFirst(1);
+    System.out.println("Queue size after adding: " + testDq.size());
+    testDq.removeLast();
+    System.out.println("Queue size after removing: " + testDq.size() 
+        + ". Is it empty? " + testDq.isEmpty());
+    
   }
 }
