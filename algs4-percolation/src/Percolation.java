@@ -9,7 +9,7 @@ public class Percolation {
    * @param n the side of the n-by-b grid
    */
   public Percolation(int n) {
-    if (n < 0)
+    if (n <= 0)
       throw new java.lang.IllegalArgumentException();
 
     this.n = n;
