@@ -3,7 +3,6 @@ public class PercolationStats {
   private int n;
   private int gridSize;
   private int nTests;
-  private int[] openSites;
   private double[] threshold;
   
 
@@ -21,7 +20,7 @@ public class PercolationStats {
     this.n = n;
     gridSize = n * n;
     nTests = t;
-    openSites = new int[t];
+    int[] openSites = new int[t];
     threshold = new double[t];
     int counter;
     int r;
