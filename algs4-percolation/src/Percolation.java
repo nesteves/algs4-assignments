@@ -3,7 +3,7 @@ public class Percolation {
   private int n;
   private WeightedQuickUnionUF uf;
   private WeightedQuickUnionUF ufBackwash;
-  private int[] grid;
+  private boolean[] grid;
 
   /**
    * Constructor to set up the grid and necessary properties
@@ -16,11 +16,7 @@ public class Percolation {
     this.n = n;
     uf = new WeightedQuickUnionUF(n * n + 2);
     ufBackwash = new WeightedQuickUnionUF(n * n + 1);
-    grid = new int[n * n];
-
-    for (int i = 0; i < n * n; i++) {
-      grid[i] = 0;
-    }
+    grid = new boolean[n * n];
   }
 
   /**
@@ -34,7 +30,7 @@ public class Percolation {
       throw new java.lang.IndexOutOfBoundsException();
 
     int position = convertCoordinates(i, j);
-    grid[position] = 1;
+    grid[position] = true;
 
     unionAbove(position);
     unionBelow(position);
@@ -56,7 +52,7 @@ public class Percolation {
 
     int position = convertCoordinates(i, j);
 
-    return grid[position] == 1;
+    return grid[position];
   }
 
   /**
@@ -110,7 +106,7 @@ public class Percolation {
    * @return true if the node is open, false otherwise
    */
   private boolean isOpen(int i) {
-    return grid[i] == 1;
+    return grid[i];
   }
 
   /**
@@ -210,11 +206,6 @@ public class Percolation {
     p.open(9, 1);
     p.open(10, 1);
     p.open(10, 3);
-    int counter = 0;
-    for (int i : p.grid) {
-      if (counter++ % 10 == 0) System.out.print("\n");
-      System.out.print(" " + i);
-    }
     
     System.out.println("\n\nIs the (1, 1) node open? " + p.isOpen(1, 1));
     System.out.println("Is the (2, 1) node full? " + p.isFull(2, 1));
