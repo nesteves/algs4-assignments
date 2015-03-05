@@ -28,7 +28,7 @@ public class Point implements Comparable<Point> {
    * it is called on
    */
   public void draw() {
-    
+    StdDraw.point(this.x, this.y);
   }
   
   /**
@@ -38,14 +38,14 @@ public class Point implements Comparable<Point> {
    * @param that end point for the line segment to be drawn
    */
   public void drawTo(Point that) {
-    
+    StdDraw.line(this.x, this.y, that.x, that.y);
   }
   
   /**
    * Returns a string representation of the point instance
    */
   public String toString() {
-    return null;
+    return "(" + x + ", " + y + ")";
   }
   
   /**
@@ -56,7 +56,20 @@ public class Point implements Comparable<Point> {
    * smaller than the given point, 1 otherwise
    */
   public int compareTo(Point that) {
-    return 0;
+    if (that.y > this.y) {
+      return -1;
+    }
+    else if (that.y == this.y) {
+      if (that.x > this.x) 
+        return -1;
+      else if (that.x == this.x)
+        return 0;
+      else
+        return 1;
+    }
+    else {
+      return 1;
+    }
   }
   
   /**
@@ -66,6 +79,6 @@ public class Point implements Comparable<Point> {
    * @return the slope between the two points
    */
   public double slopeTo(Point that) {
-    return 0.0;
+    return (double)(that.y - this.y)/(that.x - this.x);
   }
 }
