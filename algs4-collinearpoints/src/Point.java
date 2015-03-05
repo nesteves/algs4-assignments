@@ -81,4 +81,33 @@ public class Point implements Comparable<Point> {
   public double slopeTo(Point that) {
     return (double)(that.y - this.y)/(that.x - this.x);
   }
+  
+  public static void main(String[] args) {
+    
+    // Test the compareTo() method
+    Point a = new Point(1, 1);
+    Point b = new Point(2, 2);
+    
+    System.out.println("Is " + b + " bigger than " + a + "? " + b.compareTo(a));
+    
+    b = new Point(2, 1);
+    
+    System.out.println("Is " + b + " bigger than " + a + "? " + b.compareTo(a));
+    
+    b = new Point(1, 2);
+    
+    System.out.println("Is " + b + " bigger than " + a + "? " + b.compareTo(a));
+    
+    b = new Point(0, 1);
+    
+    System.out.println("Is " + b + " bigger than " + a + "? " + b.compareTo(a));
+    
+    b = new Point(1, 1);
+    
+    System.out.println("Is " + b + " bigger than " + a + "? " + b.compareTo(a));
+    
+    b = new Point(1, 0);
+    
+    System.out.println("Is " + b + " bigger than " + a + "? " + b.compareTo(a));
+  }
 }
