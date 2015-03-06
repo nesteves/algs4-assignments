@@ -117,6 +117,7 @@ public class Point implements Comparable<Point> {
   public static void main(String[] args) {
     
     // Test the compareTo() method
+    System.out.println("--------Test the compareTo method--------\n");
     Point a = new Point(1, 1);
     Point b = new Point(2, 2);
     
@@ -141,5 +142,21 @@ public class Point implements Comparable<Point> {
     b = new Point(1, 0);
     
     System.out.println("Is " + b + " bigger than " + a + "? " + b.compareTo(a));
+    
+    // Test the SLOPE_ORDER comparator
+    System.out.println("\n--------Test the SLOPE_ORDER comparator--------\n");
+    
+    Point c = new Point(3, 4);
+    Point d = new Point(3, 5);
+    
+    System.out.println("Does " + c + " have a higher slope than " + d + "? " + a.SLOPE_ORDER.compare(c, d));
+    
+    d = new Point(3, 3);
+    
+    System.out.println("Does " + c + " have a higher slope than " + d + "? " + a.SLOPE_ORDER.compare(c, d));
+    
+    d = new Point(3, 4);
+    
+    System.out.println("Does " + c + " have a higher slope than " + d + "? " + a.SLOPE_ORDER.compare(c, d));
   }
 }
