@@ -6,9 +6,30 @@ public class Point implements Comparable<Point> {
   private final int x;
   private final int y;
   
+  /**
+   * Provides a method to compare 2 points in respect to the
+   * slope they make with the calling instance of Point
+   */
   public final Comparator<Point> SLOPE_ORDER = new Comparator<Point>() {
+    /**
+     * Returns the result of comparing the slope that the reference
+     * point makes with the calling instance to the slope that
+     * another point makes with the calling instance
+     * @param o1 reference point
+     * @param o2 comparison point
+     * @return 1 if the slope of o1 is higher than o2's, 0 if they're
+     * equal, -1 otherwise
+     */
     public int compare(Point o1, Point o2) {
-      return 0;
+      double slope1 = slopeTo(o1);
+      double slope2 = slopeTo(o2);
+      
+      if (slope2 > slope1)
+        return -1;
+      else if (slope2 < slope1)
+        return 1;
+      else
+        return 0;
     }
   };
   
@@ -79,6 +100,17 @@ public class Point implements Comparable<Point> {
    * @return the slope between the two points
    */
   public double slopeTo(Point that) {
+    
+    if (that.x == this.x) {
+      if (that.y == this.y)
+        return Double.NEGATIVE_INFINITY;
+      else
+        return Double.POSITIVE_INFINITY;
+    }
+    
+    if (that.y == this.y)
+      return 0;
+    
     return (double)(that.y - this.y)/(that.x - this.x);
   }
   
