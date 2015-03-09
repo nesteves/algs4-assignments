@@ -12,9 +12,8 @@ public class Point implements Comparable<Point> {
    */
   public final Comparator<Point> SLOPE_ORDER = new Comparator<Point>() {
     /**
-     * Returns the result of comparing the slope that the reference
-     * point makes with the calling instance to the slope that
-     * another point makes with the calling instance
+     * Returns the result of comparing the slope that the reference point makes with
+     * the calling instance to the slope that another point makes with the calling instance
      * @param o1 reference point
      * @param o2 comparison point
      * @return 1 if the slope of o1 is higher than o2's, 0 if they're
@@ -23,7 +22,6 @@ public class Point implements Comparable<Point> {
     public int compare(Point o1, Point o2) {
       double slope1 = slopeTo(o1);
       double slope2 = slopeTo(o2);
-      
       if (slope2 > slope1)
         return -1;
       else if (slope2 < slope1)
@@ -111,7 +109,7 @@ public class Point implements Comparable<Point> {
     if (that.y == this.y)
       return 0;
     
-    return (double)(that.y - this.y)/(that.x - this.x);
+    return (double) (that.y - this.y)/(that.x - this.x);
   }
   
   public static void main(String[] args) {
