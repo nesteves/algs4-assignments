@@ -65,16 +65,21 @@ public class Fast {
     
     for (Point p : points) {
       Arrays.sort(sortedPoints, p.SLOPE_ORDER);
+      //System.out.println("The slope ordered array: " + Arrays.toString(sortedPoints));
       
       // find the longest segment in the sortedPoints array
       int s = 0; // start point
       int l = 0; // length
       int sMax = 0;
       int lMax = 0;
+      
+      //System.out.println("Origin point: " + p + ".");
+      
       for (int i = 0; i < sortedPoints.length; i++) {
         
         if (i == s || p.slopeTo(sortedPoints[s]) == p.slopeTo(sortedPoints[i])) {
           l++;
+          //System.out.println("Comparing " + p + " and " + sortedPoints[s] + " and " + sortedPoints[i] + ". (" + s + ", " + i + ").");
         }
         else {
           if (l >= lMax) {
@@ -82,7 +87,7 @@ public class Fast {
             lMax = l;
           }
           s = i;
-          l = 0;
+          l = 1;
         }
       }
       // Put the points into an array
@@ -95,6 +100,7 @@ public class Fast {
         segment[lMax] = p;
         Arrays.sort(segment);
         segments.add(segment);
+        //System.out.println("The result is " + Arrays.toString(segment));
       }
     }
     
