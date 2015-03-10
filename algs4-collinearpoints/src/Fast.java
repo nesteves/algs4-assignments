@@ -71,34 +71,32 @@ public class Fast {
       //System.out.println("The slope ordered array: " + Arrays.toString(sortedPoints));
       
       // find the longest segment in the sortedPoints array
-      int s = 0; // start point
-      int l = 0; // length
+      int s = 1; // start point (The point itself is always placed at the start of the array)
+      int e = 1; // end point
       int sMax = 0;
-      int lMax = 0;
-      
-      //System.out.println("Origin point: " + p + ".");
-      
-      // The point itself is always placed at the start of the array
-      for (int i = 1; i < sortedPoints.length; i++) {
-        
-        if (i == s || p.SLOPE_ORDER.compare(sortedPoints[s],  sortedPoints[i]) == 0) {
-          l++;
-          //System.out.println("Comparing " + p + " and " + sortedPoints[s] + " and " + sortedPoints[i] + ". (" + s + ", " + i + ").");
+      int eMax = 0;
+      while (e < sortedPoints.length) {
+        if (p.slopeTo(sortedPoints[s]) == p.slopeTo(sortedPoints[e])) {
+          e++;
         }
         else {
-          if (l >= lMax) {
+          if (e - s > eMax - sMax) {
             sMax = s;
-            lMax = l;
+            eMax = e;
           }
-          s = i;
-          l = 1;
+          s = e;
+          e++;
         }
       }
+      if (e - s > eMax - sMax) {
+        sMax = s;
+        eMax = e;
+      }
       // Put the points into an array
-      if (lMax >= 2) {
+      if (eMax - sMax > 2) {
         //System.out.println("Start point: " + sMax + ". Length of semgent: " + lMax + ".");
         ArrayList<Point> segment = new ArrayList<Point>();
-        for (int i = sMax; i < sMax + lMax; i++) {
+        for (int i = sMax; i < eMax; i++) {
           segment.add(sortedPoints[i]);
         }
         segment.add(p);
