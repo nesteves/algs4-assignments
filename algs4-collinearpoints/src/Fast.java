@@ -1,5 +1,9 @@
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Collections;
+import java.util.HashSet;
 import java.util.LinkedList;
+import java.util.Set;
 
 /**
  * Class used to find collinear points faster than the Brute
@@ -17,15 +21,15 @@ public class Fast {
    * @param segment array of points
    * @return a string in the format point1 -> point2 -> point3
    */
-  private static String stringSegment(Point[] segment) {
+  private static String stringSegment(ArrayList<Point> segment) {
     StringBuilder s = new StringBuilder();
     
-    for (int i = 0; i < segment.length - 1; i++) {
-      s.append(segment[i]);
+    for (int i = 0; i < segment.size() - 1; i++) {
+      s.append(segment.get(i));
       s.append(" -> ");
     }
     
-    s.append(segment[segment.length - 1]);
+    s.append(segment.get(segment.size() - 1));
     
     return s.toString();
   }
@@ -44,14 +48,14 @@ public class Fast {
    * Draw the lines represented by the given segment
    * @param segment a set of points representing a segment
    */
-  private static void drawSegments(Point[] segment) {
-    segment[0].drawTo(segment[segment.length-1]);
+  private static void drawSegments(ArrayList<Point> segment) {
+    segment.get(0).drawTo(segment.get(segment.size() - 1));
   }
 
   public static void main(String[] args) {
     if (args.length != 1) throw new java.lang.IllegalArgumentException();
     
-    LinkedList<Point[]> segments = new LinkedList<Point[]>();
+    Set<ArrayList<Point>> segments = new HashSet<ArrayList<Point>>();
        
     // Read in all the Points from the input file into an array
     In input = new In(args[0]);
@@ -93,12 +97,12 @@ public class Fast {
       // Put the points into an array
       if (lMax >= 2) {
         //System.out.println("Start point: " + sMax + ". Length of semgent: " + lMax + ".");
-        Point[] segment = new Point[lMax + 1];
+        ArrayList<Point> segment = new ArrayList<Point>();
         for (int i = sMax; i < sMax + lMax; i++) {
-          segment[i - sMax] = sortedPoints[i];
+          segment.add(sortedPoints[i]);
         }
-        segment[lMax] = p;
-        Arrays.sort(segment);
+        segment.add(p);
+        Collections.sort(segment);
         segments.add(segment);
         //System.out.println("The result is " + Arrays.toString(segment));
       }
@@ -110,7 +114,7 @@ public class Fast {
     drawPoints(points);
     
     // Print out the collinear segments and draw them
-    for (Point[] s : segments) {
+    for (ArrayList<Point> s : segments) {
       System.out.println(stringSegment(s));
       drawSegments(s);
     }
