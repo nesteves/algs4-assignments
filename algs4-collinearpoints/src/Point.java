@@ -3,9 +3,6 @@ import java.util.Comparator;
 
 public class Point implements Comparable<Point> {
   
-  private final int x;
-  private final int y;
-  
   /**
    * Provides a method to compare 2 points in respect to the
    * slope they make with the calling instance of Point
@@ -30,6 +27,9 @@ public class Point implements Comparable<Point> {
         return 0;
     }
   };
+  
+  private final int x;
+  private final int y;
   
   /**
    * Basic constructor that takes the point's
