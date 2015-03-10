@@ -78,9 +78,10 @@ public class Fast {
       
       //System.out.println("Origin point: " + p + ".");
       
-      for (int i = 0; i < sortedPoints.length; i++) {
+      // The point itself is always placed at the start of the array
+      for (int i = 1; i < sortedPoints.length; i++) {
         
-        if (i == s || p.slopeTo(sortedPoints[s]) == p.slopeTo(sortedPoints[i])) {
+        if (i == s || p.SLOPE_ORDER.compare(sortedPoints[s],  sortedPoints[i]) == 0) {
           l++;
           //System.out.println("Comparing " + p + " and " + sortedPoints[s] + " and " + sortedPoints[i] + ". (" + s + ", " + i + ").");
         }
