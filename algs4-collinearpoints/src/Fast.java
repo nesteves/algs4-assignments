@@ -51,6 +51,22 @@ public class Fast {
     segment.get(0).drawTo(segment.get(segment.size() - 1));
   }
   
+  /**
+   * Creates a segment of points sorted by natural order
+   * based on a given list of points ordered by their slopes
+   * relative to a first point
+   * @param startIndex index at which to start drawing points from
+   *    pointsArray
+   * @param endIndex index at which to stop drawing points from
+   *    pointsArray
+   * @param firstPoint point relative to which the slope of the points
+   *    in pointsArray is calculated
+   * @param pointsArray array of points ordered by the slope
+   *    they make agains firstPoint
+   * @return a list of the points from pointsArray[startIndex] up to but
+   *    not including pointsArray[endIndex] plus firstPoint, all sorted
+   *    by their natural order
+   */
   private static ArrayList<Point> getSegment(int startIndex, int endIndex, Point firstPoint, Point[] pointsArray) {
     ArrayList<Point> segment = new ArrayList<Point>(endIndex - startIndex + 1);
     segment.add(firstPoint);
