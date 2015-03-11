@@ -73,36 +73,33 @@ public class Fast {
       // find the longest segment in the sortedPoints array
       int s = 1; // start point (The point itself is always placed at the start of the array)
       int e = 1; // end point
-      int sMax = 0;
-      int eMax = 0;
       while (e < sortedPoints.length) {
         if (p.slopeTo(sortedPoints[s]) == p.slopeTo(sortedPoints[e])) {
           e++;
         }
         else {
-          if (e - s > eMax - sMax) {
-            sMax = s;
-            eMax = e;
+          if (e - s > 2) {
+            // TODO refactor this duplicate code out to a static method?
+            ArrayList<Point> segment = new ArrayList<Point>();
+            for (int i = s; i < e; i++) {
+              segment.add(sortedPoints[i]);
+            }
+            segment.add(p);
+            Collections.sort(segment);
+            segments.add(segment);
           }
           s = e;
           e++;
         }
       }
-      if (e - s > eMax - sMax) {
-        sMax = s;
-        eMax = e;
-      }
-      // Put the points into an array
-      if (eMax - sMax > 2) {
-        //System.out.println("Start point: " + sMax + ". Length of semgent: " + lMax + ".");
+      if (e - s > 2) {
         ArrayList<Point> segment = new ArrayList<Point>();
-        for (int i = sMax; i < eMax; i++) {
+        for (int i = s; i < e; i++) {
           segment.add(sortedPoints[i]);
         }
         segment.add(p);
         Collections.sort(segment);
         segments.add(segment);
-        //System.out.println("The result is " + Arrays.toString(segment));
       }
     }
     
