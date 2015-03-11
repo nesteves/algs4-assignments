@@ -50,6 +50,19 @@ public class Fast {
   private static void drawSegments(ArrayList<Point> segment) {
     segment.get(0).drawTo(segment.get(segment.size() - 1));
   }
+  
+  private static ArrayList<Point> getSegment(int startIndex, int endIndex, Point firstPoint, Point[] pointsArray) {
+    ArrayList<Point> segment = new ArrayList<Point>(endIndex - startIndex + 1);
+    segment.add(firstPoint);
+    
+    for (int i = startIndex; i < endIndex; i++) {
+      segment.add(pointsArray[i]);
+    }
+    
+    Collections.sort(segment);
+    
+    return segment;
+  }
 
   public static void main(String[] args) {
     if (args.length != 1) throw new java.lang.IllegalArgumentException();
@@ -79,27 +92,14 @@ public class Fast {
         }
         else {
           if (e - s > 2) {
-            // TODO refactor this duplicate code out to a static method?
-            ArrayList<Point> segment = new ArrayList<Point>();
-            for (int i = s; i < e; i++) {
-              segment.add(sortedPoints[i]);
-            }
-            segment.add(p);
-            Collections.sort(segment);
-            segments.add(segment);
+            segments.add(getSegment(s, e, p, sortedPoints));
           }
           s = e;
           e++;
         }
       }
       if (e - s > 2) {
-        ArrayList<Point> segment = new ArrayList<Point>();
-        for (int i = s; i < e; i++) {
-          segment.add(sortedPoints[i]);
-        }
-        segment.add(p);
-        Collections.sort(segment);
-        segments.add(segment);
+        segments.add(getSegment(s, e, p, sortedPoints));
       }
     }
     
