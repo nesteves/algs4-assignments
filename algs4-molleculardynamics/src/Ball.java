@@ -11,13 +11,16 @@ public class Ball {
   public Ball() {
     this.rx = StdRandom.uniform();
     this.ry = StdRandom.uniform();
-    this.vx = StdRandom.uniform();
-    this.vy = StdRandom.uniform();
-    this.radius = 0.05;
+    this.vx = StdRandom.uniform() / 50;
+    this.vy = StdRandom.uniform() / 50;
+    this.radius = 0.005;
   }
 
   public void move(double dt) {
-    
+    if ((rx + vx * dt < radius) || (rx + vx * dt > 1.0 - radius)) vx = -vx;
+    if ((ry + vy * dt < radius) || (ry + vy * dt > 1.0 - radius)) vy = -vy;
+    rx = rx + vx * dt;
+    ry = ry + vy * dt;
   }
   
   public void draw() {
