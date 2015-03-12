@@ -8,13 +8,12 @@ public class Ball {
   private double vx, vy;        // velocity
   private final double radius;  // radius of the ball
   
-  public Ball(double rx, double ry, double vx, double vy, double radius) {
-    super();
-    this.rx = rx;
-    this.ry = ry;
-    this.vx = vx;
-    this.vy = vy;
-    this.radius = radius;
+  public Ball() {
+    this.rx = StdRandom.uniform();
+    this.ry = StdRandom.uniform();
+    this.vx = StdRandom.uniform();
+    this.vy = StdRandom.uniform();
+    this.radius = 0.05;
   }
 
   public void move(double dt) {
@@ -22,6 +21,6 @@ public class Ball {
   }
   
   public void draw() {
-    
+    StdDraw.filledCircle(rx, ry, radius);
   }
 }

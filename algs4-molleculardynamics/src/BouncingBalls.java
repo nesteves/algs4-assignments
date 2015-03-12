@@ -12,7 +12,7 @@ public class BouncingBalls {
     Ball[] balls = new Ball[n];
     
     for (int i = 0; i < n; i++) {
-      balls[i] = new Ball(StdRandom.uniform()*10, StdRandom.uniform()*10, StdRandom.uniform(), StdRandom.uniform(), 1);
+      balls[i] = new Ball();
     }
     
     while (true) {
