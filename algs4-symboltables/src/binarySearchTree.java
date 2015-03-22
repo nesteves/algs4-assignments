@@ -171,6 +171,40 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
   }
   
   /**
+   * Returns the smallest key that is larger
+   * than the given key
+   * @param key given key
+   * @return smallest key larger than the given key
+   */
+  public Key ceiling(Key key) {
+    Node x = ceiling(root, key);
+    if (x == null) return null;
+    return x.key;
+  }
+  
+  /**
+   * Recursive method that supports the ceiling(Key key) method
+   * @param x the intermediate node
+   * @param key the original key
+   */
+  private Node ceiling(Node x, Key key) {
+    if (x == null) return null;
+    
+    int cmp = key.compareTo(x.key);
+    
+    if (cmp == 0) {
+      return x;
+    }
+    else if (cmp > 0) {
+      return ceiling(x.right, key);
+    }
+    
+    Node t = ceiling(x.left, key);
+    if (t != null) return t;
+    return x;
+  }
+  
+  /**
    * Deletes a key-value pair from the binary tree
    * @param key the key of the key-value pair to be
    * deleted
