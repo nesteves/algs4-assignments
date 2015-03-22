@@ -105,6 +105,22 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
   }
   
   /**
+   * Returns the smallest key in the
+   * binary search tree
+   * @return the smallest Key
+   */
+  public Key min() {
+    if (root == null) return null;
+    
+    Node x = root;
+    while (x.left != null) {
+      x = x.left;
+    }
+    
+    return x.key;
+  }
+  
+  /**
    * Deletes a key-value pair from the binary tree
    * @param key the key of the key-value pair to be
    * deleted
