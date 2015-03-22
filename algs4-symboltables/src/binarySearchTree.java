@@ -121,6 +121,22 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
   }
   
   /**
+   * Returns the largest key in the
+   * binary search tree
+   * @return the largest Key
+   */
+  public Key max() {
+    if (root == null) return null;
+    
+    Node x = root;
+    while (x.right != null) {
+      x = x.right;
+    }
+    
+    return x.key;
+  }
+  
+  /**
    * Deletes a key-value pair from the binary tree
    * @param key the key of the key-value pair to be
    * deleted
