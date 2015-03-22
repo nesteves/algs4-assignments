@@ -1,3 +1,6 @@
+import java.util.Queue;
+import java.util.concurrent.LinkedBlockingQueue;
+
 /**
  * Implementation of a symbol table using an explicit binary search tree
  */
@@ -253,7 +256,23 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
    * @return an iterator for the keys in the binary tree
    */
   public Iterable<Key> iterator() {
-    return null;
+    Queue<Key> q = new LinkedBlockingQueue<Key>();
+    inOrder(root, q);
+    return q;
+  }
+  
+  /**
+   * Recursive method that fills up the queue with the
+   * keys from the binary search tree ordered by their
+   * natural order
+   * @param x the intermediate Node
+   * @param q the Queue object being filled
+   */
+  private void inOrder(Node x, Queue<Key> q) {
+    if (x == null) return;
+    inOrder(x.left, q);
+    q.add(x.key);
+    inOrder(x.right, q);
   }
   
   public static void main(String[] args) {
