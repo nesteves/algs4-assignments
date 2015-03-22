@@ -137,6 +137,40 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
   }
   
   /**
+   * Returns the largest key that is smaller
+   * than the given key
+   * @param key given key
+   * @return largest key smaller than the given key
+   */
+  public Key floor(Key key) {
+    Node x = floor(root, key);
+    if (x == null) return null;
+    return x.key;
+  }
+  
+  /**
+   * Recursive method that supports the floor(Key key) method
+   * @param x the intermediate node
+   * @param key the original given key
+   */
+  private Node floor(Node x, Key key) {
+    if (x == null) return null;
+    
+    int cmp = key.compareTo(x.key);
+    
+    if (cmp == 0) {
+      return x;
+    }
+    else if (cmp < 0) {
+      return floor(x.left, key);
+    }
+    
+    Node t = floor(x.right, key);
+    if (t != null) return t;
+    else return x;
+  }
+  
+  /**
    * Deletes a key-value pair from the binary tree
    * @param key the key of the key-value pair to be
    * deleted
