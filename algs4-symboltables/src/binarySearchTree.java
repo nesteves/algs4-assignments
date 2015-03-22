@@ -11,11 +11,13 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
   private class Node {
     private Key key;
     private Value value;
+    private int count;
     public Node left, right;
     
-    public Node(Key key, Value value) {
+    public Node(Key key, Value value, int count) {
       this.key = key;
       this.value = value;
+      this.count = count;
     }
   }
   
@@ -29,6 +31,26 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
   }
   
   /**
+   * Returns the size of the tree
+   * @return the size of the binary search tree
+   */
+  public int size() {
+    return size(root);
+  }
+  
+  /**
+   * Returns the size of the subtree rooted at 
+   * the given Node
+   * @param x the given Node , treated as
+   * the root of the subtree
+   * @return the size of the subtree
+   */
+  public int size(Node x) {
+    if (x == null) return 0;
+    return x.count;
+  }
+  
+  /**
    * private recursive method used to add a Node
    * to the binary tree
    * @param x
@@ -39,7 +61,7 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
   private Node put(Node x, Key key, Value value) {
     // Check for the base case of the recursion
     if (x == null) {
-      return new Node(key, value);
+      return new Node(key, value, 1);
     }
     
     int cmp = key.compareTo(x.key);
@@ -53,6 +75,7 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
     else {
       x.value = value;
     }
+    x.count = 1 + size(x.left) +size(x.right);
     return x;
   }
   
