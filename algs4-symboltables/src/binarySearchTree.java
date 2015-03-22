@@ -205,6 +205,40 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
   }
   
   /**
+   * Returns the number of keys that are smaller than
+   * the given key
+   * @param key the given key
+   * @return number of keys smaller than the given key
+   */
+  public int rank(Key key) {
+    return rank(root, key);
+  }
+  
+  /**
+   * Recursive method that supports the rank(Key key)
+   * method
+   * @param x the intermediate Node
+   * @param key the given key
+   * @return the number of keys that are smaller than the
+   * key belonging to the intermediate node
+   */
+  private int rank(Node x, Key key) {
+    if (x == null) return 0;
+    
+    int cmp = key.compareTo(x.key);
+    
+    if (cmp < 0) {
+      return rank(x.left, key);
+    }
+    else if (cmp > 0) {
+      return 1 + size(x.left) + rank(x.right, key);
+    }
+    else {
+      return size(x.left);
+    }
+  }
+  
+  /**
    * Deletes a key-value pair from the binary tree
    * @param key the key of the key-value pair to be
    * deleted
