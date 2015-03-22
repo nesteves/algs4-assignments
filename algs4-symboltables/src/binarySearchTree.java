@@ -25,7 +25,35 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
    * @param value
    */
   public void put(Key key, Value value) {
+    root = put(root, key, value);
+  }
+  
+  /**
+   * private recursive method used to add a Node
+   * to the binary tree
+   * @param x
+   * @param key
+   * @param value
+   * @return the Node it was called on
+   */
+  private Node put(Node x, Key key, Value value) {
+    // Check for the base case of the recursion
+    if (x == null) {
+      return new Node(key, value);
+    }
     
+    int cmp = key.compareTo(x.key);
+    
+    if (cmp < 0) {
+      x.left = put(x.left, key, value);
+    }
+    else if (cmp > 0) {
+      x.right = put(x.right, key, value);
+    }
+    else {
+      x.value = value;
+    }
+    return x;
   }
   
   /**
@@ -34,6 +62,22 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
    * @return the value associated with the given key
    */
   public Value get(Key key) {
+    Node x = root;
+    
+    while (x != null) {
+      int cmp = key.compareTo(x.key);
+      
+      if (cmp < 0) {
+        x = x.left;
+      }
+      else if (cmp > 0) {
+        x = x.right;
+      }
+      else {
+        return x.value;
+      }
+    }
+    
     return null;
   }
   
@@ -53,5 +97,9 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
    */
   public Iterable<Key> iterator() {
     return null;
+  }
+  
+  public static void main(String[] args) {
+    System.out.println("Compiles!");
   }
 }
