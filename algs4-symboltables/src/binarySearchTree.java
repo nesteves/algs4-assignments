@@ -114,13 +114,18 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
    */
   public Key min() {
     if (root == null) return null;
-    
-    Node x = root;
-    while (x.left != null) {
-      x = x.left;
-    }
-    
+    Node x = min(root);
     return x.key;
+  }
+  
+  /**
+   * Returns the smallest Node relative to the starting Node
+   * @param x the starting Node
+   * @return the next lower Node
+   */
+  public Node min(Node x) {
+    if (x.left == null) return x;
+    else return min(x.left);
   }
   
   /**
@@ -242,12 +247,55 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
   }
   
   /**
-   * Deletes a key-value pair from the binary tree
+   * Deletes a key-value pair from the binary tree, based 
+   * off of the Hibbard delete
    * @param key the key of the key-value pair to be
    * deleted
    */
   public void delete(Key key) {
     
+  }
+  
+  /**
+   * Recursive method that supports the delete(Key key) method
+   * @param x the current Node
+   * @param key the Key to be deleted
+   * @return the current Node after deleting the key and
+   * updating the subtree counts
+   */
+  private Node delete(Node x, Key key) {
+    /*if (x == null) return null;
+    
+    int cmp = key.compareTo(x.key);
+    
+    if (cmp < 0) {
+      x.left = delete(x.left, key);
+    }
+    else if (cmp > 0) {
+      x.right = delete(x.right, key);
+    }
+    else {
+      if (x.right == null) return x.left;
+      if (x.left == null) return x.right;
+      
+      Node t = x;
+      x = min(t.right);
+      x.left = t.left;
+      x.right = deleteMin(t.right);
+    }*/
+  }
+  
+  /**
+   * Deletes the minimum Node in respect to the given Node
+   * @param x the given Node
+   * @return the given Node, after deleting the minimum Node
+   * and updating the subtree counts
+   */
+  private Node deleteMin(Node x) {
+    if (x.left == null) return x.right;
+    x.left = deleteMin(x.left);
+    x.count = 1 + size(x.left) + size(x.right);
+    return x;
   }
   
   /**
