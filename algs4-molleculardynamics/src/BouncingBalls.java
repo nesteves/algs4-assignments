@@ -5,7 +5,7 @@
 public class BouncingBalls {
   
   public static void main(String args[]) {
-    if (args.length > 1) { throw new IllegalArgumentException("The function requires one numeric argument."); }
+    if (args.length != 1) { throw new IllegalArgumentException("The function requires one numeric argument."); }
     
     int n = Integer.parseInt(args[0]);
     
