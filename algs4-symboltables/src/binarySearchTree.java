@@ -253,7 +253,7 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
    * deleted
    */
   public void delete(Key key) {
-    
+    delete(root, key);
   }
   
   /**
@@ -264,7 +264,7 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
    * updating the subtree counts
    */
   private Node delete(Node x, Key key) {
-    /*if (x == null) return null;
+    if (x == null) return null;
     
     int cmp = key.compareTo(x.key);
     
@@ -280,9 +280,11 @@ public class binarySearchTree<Key extends Comparable<Key>, Value> {
       
       Node t = x;
       x = min(t.right);
-      x.left = t.left;
       x.right = deleteMin(t.right);
-    }*/
+      x.left = t.left;
+    }
+    x.count = 1 + size(x.left) + size(x.right);
+    return x;
   }
   
   /**
