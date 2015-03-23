@@ -55,7 +55,24 @@ public class Particle {
    * @return the time it will take for both particles to collide
    */
   public double timeToHit(Particle that) {
-    return 0.0;
+    if (this == that) return Double.POSITIVE_INFINITY;
+    
+    double dx = that.rx - this.rx;
+    double dy = that.ry - this.ry;
+    double dvx = that.vx - this.vx;
+    double dvy = that.vy - this.vy;
+    
+    double dvdr = dx * dvx + dy * dvy;
+    if (dvdr > 0) return Double.POSITIVE_INFINITY;
+    
+    double dvdv = dvx * dvx + dvy * dvy;
+    double drdr = dx * dx + dy * dy;
+    
+    double sigma = that.radius + this.radius;
+    double d = (dvdr * dvdr) - dvdv * (drdr - sigma*sigma);
+    if (d < 0) return Double.POSITIVE_INFINITY;
+    
+    return -(dvdr + Math.sqrt(d)) / dvdv;
   }
   
   /**
@@ -77,7 +94,26 @@ public class Particle {
   }
   
   public void bounceOff(Particle that) {
+    double dx = that.rx - this.rx;
+    double dy = that.ry - this.ry;
+    double dvx = that.vx - this.vx;
+    double dvy = that.vy - this.vy;
     
+    double dvdr = dx * dvx + dy * dvy;
+    double dist = this.radius + that.radius;
+    
+    double J = 2 * this.mass * that.mass * dvdr / ((this.mass + that.mass) * dist);
+    double Jx = J * dx / dist;
+    double Jy = J * dy / dist;
+    
+    this.vx += Jx / this.mass;
+    this.vy += Jy / this.mass;
+    
+    that.vx -= Jx / that.mass;
+    that.vy -= Jy / that.mass;
+    
+    this.count++;
+    that.count++;
   }
   
   public void bounceOffVerticallWall() {
