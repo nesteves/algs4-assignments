@@ -81,7 +81,15 @@ public class Particle {
    * collide with a vertical wall
    */
   public double timeToHitVerticalWall() {
-    return 0.0;
+    if (vy > 0) {
+      return (double) (1 - this.radius - ry) / vy;
+    }
+    else if (vy < 0) {
+      return (double) (this.radius - ry) / vy;
+    }
+    else {
+      return Double.POSITIVE_INFINITY;
+    }
   }
   
   /**
