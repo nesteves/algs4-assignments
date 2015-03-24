@@ -82,10 +82,10 @@ public class Particle {
    */
   public double timeToHitVerticalWall() {
     if (vy > 0) {
-      return (double) (1 - this.radius - ry) / vy;
+      return (double) (1 - radius - ry) / vy;
     }
     else if (vy < 0) {
-      return (double) (this.radius - ry) / vy;
+      return (double) (radius - ry) / vy;
     }
     else {
       return Double.POSITIVE_INFINITY;
@@ -99,10 +99,10 @@ public class Particle {
    */
   public double timeToHitHorizontallWall() {
     if (vx > 0) {
-      return (double) (1 - this.radius - rx) / vx;
+      return (double) (1 - radius - rx) / vx;
     }
     else if (vx < 0) {
-      return (double) (this.radius - rx) / vx;
+      return (double) (radius - rx) / vx;
     }
     else {
       return Double.POSITIVE_INFINITY;
