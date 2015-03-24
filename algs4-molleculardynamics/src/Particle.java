@@ -68,6 +68,14 @@ public class Particle {
   }
   
   /**
+   * @return the number of collisions that the particle
+   * has been involved in
+   */
+  public int count() {
+    return count;
+  }
+  
+  /**
    * Predicts a collision with another particle
    * @param that the particle against which to test for an eventual
    * collision
