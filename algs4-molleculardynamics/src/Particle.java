@@ -98,7 +98,15 @@ public class Particle {
    * collide with a vertical wall
    */
   public double timeToHitHorizontallWall() {
-    return 0.0;
+    if (vx > 0) {
+      return (double) (1 - this.radius - rx) / vx;
+    }
+    else if (vx < 0) {
+      return (double) (this.radius - rx) / vx;
+    }
+    else {
+      return Double.POSITIVE_INFINITY;
+    }
   }
   
   public void bounceOff(Particle that) {
