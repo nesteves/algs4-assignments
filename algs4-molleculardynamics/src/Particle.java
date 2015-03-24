@@ -55,14 +55,16 @@ public class Particle {
    * @param dt amount of time lapsed
    */
   public void move(double dt) {
-    
+    rx += vx * dt;
+    ry += vy * dt;
   }
   
   /**
    * Draws the particle in the board
    */
   public void draw() {
-    
+    StdDraw.setPenColor(color);
+    StdDraw.filledCircle(rx, ry, radius);
   }
   
   /**
