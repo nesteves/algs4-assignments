@@ -6,6 +6,96 @@
  */
 public class CollisionSystem {
   
+  private MinPQ<Event> pq;
+  private double t = 0.0; // start time
+  private double hz = 0.5; // redraw frequency
+  private Particle[] particles;
+  
+  /**
+   * Define a new collision system
+   * @param particles the given set of particles to use
+   * in the collision system
+   */
+  public CollisionSystem(Particle[] particles) {
+    this.particles = particles.clone();
+  }
+  
+  /**
+   * Predict collisions with other particles or walls
+   * within a time limit
+   * @param a the particle for which to predict collisions
+   * @param limit distance between the start time and the limit time.
+   *  Collisions happening beyond this limit are ignored
+   */
+  private void predict(Particle a, double limit) {
+    
+    if (a == null) return;
+    
+    // predict collisions between 2 particles
+    for (int i = 0; i < particles.length; i++) {
+      double dt = a.timeToHit(particles[i]);
+      
+      if (t + dt < limit)
+        pq.insert(new Event(t + dt, a, particles[i]));
+    }
+    
+    // predict collisions with walls
+    double dtX = a.timeToHitHorizontallWall();
+    double dtY = a.timeToHitVerticalWall();
+    if (t + dtX < limit)
+      pq.insert(new Event(t + dtX, a, null));
+    if (t + dtY < limit)
+      pq.insert(new Event(t + dtY, null, a));
+  }
+  
+  /**
+   * Redraws all the particles
+   * @param limit
+   */
+  private void redraw(double limit) {
+    StdDraw.clear();
+    
+    for (int i = 0; i < particles.length; i++) {
+      particles[i].draw();
+    }
+    
+    StdDraw.show(20);
+    
+    if (t < limit)
+      pq.insert(new Event(t + 1.0 / hz, null, null));
+  }
+  
+  public void simulate(double limit) {
+    
+    pq = new MinPQ<Event>();
+    for (int i = 0; i < particles.length; i++) {
+        predict(particles[i], limit);
+    }
+    pq.insert(new Event(0, null, null));
+    
+    // Main loop
+    while (!pq.isEmpty()) {
+      Event e = pq.delMin();
+      if (!e.isValid()) continue; // discard invalid collisions
+      
+      Particle a = e.a;
+      Particle b = e.b;
+      
+      for (int i = 0; i < particles.length; i++) {
+        particles[i].move(e.time - t);
+      }
+      t = e.time;
+      
+      if (a != null && b != null) a.bounceOff(b);
+      else if (a != null && b == null) a.bounceOffHorizontalWall();
+      else if (a == null && b != null) b.bounceOffVerticallWall();
+      else if (a == null && b == null) redraw(limit);
+      
+      predict(a, limit);
+      predict(b, limit);
+    }
+  }
+  
   /**
    * Inner class that defines a possible future collision
    * between a pair of Particle instances or a Particle and
