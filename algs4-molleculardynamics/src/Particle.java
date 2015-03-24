@@ -24,7 +24,7 @@ public class Particle {
    * @param mass mass of the particle
    */
   public Particle(double rx, double ry, double vx, double vy, double radius,
-      double mass) {
+      double mass, Color color) {
     super();
     this.rx = rx;
     this.ry = ry;
@@ -32,6 +32,7 @@ public class Particle {
     this.vy = vy;
     this.radius = radius;
     this.mass = mass;
+    this.color = color;
   }
   
   /**
