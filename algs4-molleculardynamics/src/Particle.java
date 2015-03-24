@@ -133,10 +133,10 @@ public class Particle {
   }
   
   public void bounceOffVerticallWall() {
-    
+    vy = -vy;
   }
   
   public void bounceOffHorizontalWall() {
-    
+    vx = -vx;
   }
 }
