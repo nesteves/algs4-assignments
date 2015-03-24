@@ -38,5 +38,32 @@ public class CollisionSystem {
       else
         countB = -1;
     }
+    
+    /**
+     * Compare 2 events based on the time each
+     * of them will occur
+     */
+    public int compareTo(Event that) {
+      if (this.time > that.time)
+        return 1;
+      else if (this.time < that.time)
+        return -1;
+      else
+        return 0;
+    }
+    
+    /**
+     * Determines whether a collision involving the particles has
+     * occurred since the event was created 
+     * @return True if no new collisions have occurred, false otherwise
+     */
+    public boolean isValid() {
+      if (a != null && a.count() != countA)
+        return false;
+      if (b != null && b.count() != countB)
+        return false;
+      
+      return true;
+    }
   }
 }
