@@ -1,3 +1,5 @@
+import java.awt.Color;
+
 
 /**
  * Class that represents a 2-dimensional
@@ -9,6 +11,7 @@ public class Particle {
   private double vx, vy;
   private final double radius;
   private final double mass;
+  private Color color;
   private int count;
   
   /**
@@ -29,6 +32,20 @@ public class Particle {
     this.vy = vy;
     this.radius = radius;
     this.mass = mass;
+  }
+  
+  /**
+   * Overload for the base constructor to create particles
+   * with random attributes
+   */
+  public Particle() {
+    rx = Math.random();
+    ry = Math.random();
+    vx = 0.01 * (Math.random() - 0.5); 
+    vy = 0.01 * (Math.random() - 0.5);
+    radius = 0.01;
+    mass = 0.5;
+    color = Color.BLACK;
   }
   
   /**
