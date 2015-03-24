@@ -3,6 +3,10 @@
  * Implements a system that simulates
  * elastic collisions within a group of
  * Particles.
+ * 
+ * Mostly copied from the implementation found at
+ * http://algs4.cs.princeton.edu/61event/CollisionSystem.java.html
+ * by Robert Sedgewick and Kevin Wayne
  */
 public class CollisionSystem {
   
@@ -155,5 +159,21 @@ public class CollisionSystem {
       
       return true;
     }
+  }
+  
+  public static void main(String[] args) {
+    if (args.length != 1) throw new java.lang.IllegalArgumentException();
+    
+    StdDraw.setCanvasSize(800, 800);
+    StdDraw.show(0);
+    
+    Particle[] particles;
+    int N = Integer.parseInt(args[0]);
+    particles = new Particle[N];
+    for (int i = 0; i < N; i++)
+      particles[i] = new Particle();
+
+    CollisionSystem system = new CollisionSystem(particles);
+    system.simulate(10000);
   }
 }
