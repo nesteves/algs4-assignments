@@ -4,6 +4,9 @@
  */
 public class Board {
   
+  private final int[][] blocks;
+  private final int n;
+  
   /**
    * Basic board constructor
    * @param blocks a 2-dimensional array where the
@@ -11,14 +14,30 @@ public class Board {
    * columns
    */
   public Board(int[][] blocks) {
+    // Check for null input
+    if (blocks == null) throw new java.lang.NullPointerException("Null argument invalid.");
+    // Guarantee that the board is square
+    for (int i = 0; i < blocks.length; i++) {
+      if (blocks.length != blocks[i].length)
+        throw new java.lang.IllegalArgumentException("The board must be square - have the same number of rows and columns.");
+    }
     
+    this.blocks = new int[blocks.length][blocks.length];
+    
+    for (int i = 0; i < blocks.length; i++) {
+      for (int j = 0; j < blocks[i].length; j++) {
+        this.blocks[i][j] = blocks[i][j];
+      }
+    }
+    
+    this.n = blocks.length;
   }
   
   /**
    * @return the Board's dimension.
    */
   public int dimension() {
-    return 0;
+    return this.n;
   }
   
   /**
