@@ -47,7 +47,15 @@ public class Board {
    * @return the number of blocks that are out of place
    */
   public int hamming() {
-    return 0;
+    int result = 0;
+    
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (blocks[i][j] != goalValue(i, j)) result++;
+      }
+    }
+    
+    return result;
   }
   
   /** 
