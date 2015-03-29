@@ -106,7 +106,31 @@ public class Board {
     return null;
   }
   
+  /**
+   * Returns the goal value, given the board position
+   * @param row the value's row
+   * @param col the value's column
+   * @return the goal value for the board
+   */
+  private int goalValue(int row, int col) {
+    if (row + 1 != this.n || col + 1 != this.n) {
+      return (n * row) + col + 1;
+    }
+    return 0;
+  }
+  
   public static void main(String[] args) {
-    System.out.println("COMPILES!");
+    
+    Board testBoard = new Board(new int[][] {
+        {1,2,3},
+        {4,5,6},
+        {7,8,9}
+    });
+    
+    System.out.println("Test private method goalValue()");
+    System.out.println("The goal value for position [0][0] is " + testBoard.goalValue(0,0));
+    System.out.println("The goal value for position [1][1] is " + testBoard.goalValue(1,1));
+    System.out.println("The goal value for position [1][2] is " + testBoard.goalValue(1,2));
+    System.out.println("The goal value for position [2][2] is " + testBoard.goalValue(2,2));
   }
 }
