@@ -15,7 +15,8 @@ public class BoardTest {
     
     Board testBoard = new Board(testInput);
     
-    assertEquals(testInput.length, testBoard.dimension());
+    assertEquals("After creating a new 3*3 board, the resulting dimension should be 3",
+        testInput.length, testBoard.dimension());
   }
   
   @Test(expected = NullPointerException.class)
