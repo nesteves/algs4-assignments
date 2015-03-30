@@ -51,7 +51,8 @@ public class Board {
     
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < n; j++) {
-        if (blocks[i][j] != goalValue(i, j)) result++;
+        if (blocks[i][j] != 0 && blocks[i][j] != goalValue(i, j))
+          result++;
       }
     }
     
@@ -130,9 +131,9 @@ public class Board {
   public static void main(String[] args) {
     
     Board testBoard = new Board(new int[][] {
-        {1,2,3},
-        {4,5,6},
-        {7,8,9}
+        {8,1,3},
+        {4,0,2},
+        {7,6,5}
     });
     
     System.out.println("Test private method goalValue()");
@@ -140,5 +141,10 @@ public class Board {
     System.out.println("The goal value for position [1][1] is " + testBoard.goalValue(1,1));
     System.out.println("The goal value for position [1][2] is " + testBoard.goalValue(1,2));
     System.out.println("The goal value for position [2][2] is " + testBoard.goalValue(2,2));
+    
+    System.out.println("\nTest the hamming() function:");
+    System.out.println("The hamming value for the board:");
+    System.out.println("\t8 1 3 \n\t4   2\n\t7 6 5");
+    System.out.println("The overall Hamming distance for the board is: " +  testBoard.hamming());
   }
 }
