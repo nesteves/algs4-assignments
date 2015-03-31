@@ -70,4 +70,46 @@ public class BoardTest {
     
     assertFalse(testBoard.isGoal());
   }
+  
+  @Test
+  public void testEqualsTrue() {
+    int[][] testInput = new int[][]{
+        {3,2,1},
+        {4,5,6},
+        {7,8,0}
+    };
+    
+    Board testBoard = new Board(testInput);
+    
+    int[][] testInput2 = new int[][]{
+        {3,2,1},
+        {4,5,6},
+        {7,8,0}
+    };
+    
+    Board testBoard2 = new Board(testInput2);
+    
+    assertTrue(testBoard.equals(testBoard2));
+  }
+  
+  @Test
+  public void testEqualsFalse() {
+    int[][] testInput = new int[][]{
+        {3,2,1},
+        {4,5,6},
+        {7,8,0}
+    };
+    
+    Board testBoard = new Board(testInput);
+    
+    int[][] testInput2 = new int[][]{
+        {1,2,3},
+        {4,5,6},
+        {7,8,0}
+    };
+    
+    Board testBoard2 = new Board(testInput2);
+    
+    assertFalse(testBoard.equals(testBoard2));
+  }
 }
