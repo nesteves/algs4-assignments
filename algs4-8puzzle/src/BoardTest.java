@@ -55,7 +55,7 @@ public class BoardTest {
     
     Board testBoard = new Board(testInput);
     
-    assertTrue(testBoard.isGoal());
+    assertTrue("This should be a solved board.", testBoard.isGoal());
   }
   
   @Test
@@ -68,7 +68,7 @@ public class BoardTest {
     
     Board testBoard = new Board(testInput);
     
-    assertFalse(testBoard.isGoal());
+    assertFalse("This should not be a solved board.", testBoard.isGoal());
   }
   
   @Test
@@ -89,7 +89,7 @@ public class BoardTest {
     
     Board testBoard2 = new Board(testInput2);
     
-    assertTrue(testBoard.equals(testBoard2));
+    assertTrue("The 2 boards should be equal.", testBoard.equals(testBoard2));
   }
   
   @Test
@@ -110,6 +110,6 @@ public class BoardTest {
     
     Board testBoard2 = new Board(testInput2);
     
-    assertFalse(testBoard.equals(testBoard2));
+    assertFalse("The 2 boards should be different.", testBoard.equals(testBoard2));
   }
 }
