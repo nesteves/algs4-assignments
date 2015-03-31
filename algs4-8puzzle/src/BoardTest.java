@@ -15,7 +15,7 @@ public class BoardTest {
     
     Board testBoard = new Board(testInput);
     
-    assertEquals("After creating a new 3*3 board, the resulting dimension should be 3",
+    assertEquals("After creating a new 3*3 board, the resulting dimension should be 3.",
         testInput.length, testBoard.dimension());
   }
   
@@ -27,5 +27,21 @@ public class BoardTest {
   @Test(expected = IllegalArgumentException.class)
   public void testBoardNonSquareInput() {
     new Board(new int[][] { {1,2}, {1} });
+  }
+  
+  @Test
+  public void testToString() {
+    int[][] testInput = new int[][]{
+        {1,2,3},
+        {4,5,6},
+        {7,8,0}
+    };
+    
+    Board testBoard = new Board(testInput);
+    
+    String expected = "3\n 1 2 3\n 4 5 6\n 7 8 0";
+    
+    assertEquals("The output of toString() should be correct.",
+        testBoard.toString(), expected);
   }
 }
