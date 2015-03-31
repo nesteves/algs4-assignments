@@ -44,4 +44,30 @@ public class BoardTest {
     assertEquals("The output of toString() should be correct.",
         testBoard.toString(), expected);
   }
+  
+  @Test
+  public void testIsGoalTrue() {
+    int[][] testInput = new int[][]{
+        {1,2,3},
+        {4,5,6},
+        {7,8,0}
+    };
+    
+    Board testBoard = new Board(testInput);
+    
+    assertTrue(testBoard.isGoal());
+  }
+  
+  @Test
+  public void testIsGoalFalse() {
+    int[][] testInput = new int[][]{
+        {3,2,1},
+        {4,5,6},
+        {7,8,0}
+    };
+    
+    Board testBoard = new Board(testInput);
+    
+    assertFalse(testBoard.isGoal());
+  }
 }
