@@ -77,7 +77,15 @@ public class Board {
    * false otherwise
    */
   public boolean isGoal() {
-    return false;
+    
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (blocks[i][j] != goalValue(i, j))
+          return false;
+      }
+    }
+    
+    return true;
   }
   
   /**
