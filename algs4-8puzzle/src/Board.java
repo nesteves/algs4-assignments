@@ -105,7 +105,14 @@ public class Board {
    * in the same positions), false otherwise
    */
   public boolean equals(Board that) {
-    return false;
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (this.blocks[i][j] != that.blocks[i][j])
+          return false;
+      }
+    }
+    
+    return true;
   }
   
   /**
