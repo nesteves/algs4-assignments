@@ -112,7 +112,17 @@ public class Board {
    * Produces a String representation of the current instance
    */
   public String toString() {
-    return null;
+    StringBuilder str = new StringBuilder();
+    
+    str.append(n);
+    for (int i = 0; i < n; i++) {
+      str.append("\n");
+      for (int j = 0; j < n; j++) {
+        str.append(" ").append(blocks[i][j]);
+      }
+    }
+    
+    return str.toString();
   }
   
   /**
@@ -146,5 +156,8 @@ public class Board {
     System.out.println("The hamming value for the board:");
     System.out.println("\t8 1 3 \n\t4   2\n\t7 6 5");
     System.out.println("The overall Hamming distance for the board is: " +  testBoard.hamming());
+    
+    System.out.println("\nTest the toString() function:");
+    System.out.println(testBoard);
   }
 }
