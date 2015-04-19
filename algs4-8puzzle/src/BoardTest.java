@@ -173,4 +173,35 @@ public class BoardTest {
     
     assertEquals("The manhattan distance for the given board should be " + expected3 + ".", expected3, testBoard3.manhattan());
   }
+  
+  @Test
+  public void testTwinBoard() {
+    Board testBoard = new Board(new int[][]{
+        {8,1,3},
+        {4,0,2},
+        {7,6,5}
+    });
+    
+    Board expectedBoard = new Board(new int[][]{
+        {1,8,3},
+        {4,0,2},
+        {7,6,5}
+    });
+    
+    assertEquals("The resulting board should have the first 2 values in the first row swapped.", expectedBoard, testBoard.twin());
+    
+    Board testBoard2 = new Board(new int[][]{
+        {0,1,3},
+        {4,8,2},
+        {7,6,5}
+    });
+    
+    Board expectedBoard2 = new Board(new int[][]{
+        {0,3,1},
+        {4,8,2},
+        {7,6,5}
+    });
+    
+    assertEquals("The resulting board should have the first 2 values after the 0 in the first row swapped.", expectedBoard2, testBoard2.twin());
+  }
 }
