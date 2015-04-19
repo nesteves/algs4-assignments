@@ -1,4 +1,3 @@
-import java.util.Queue;
 
 
 /**
@@ -153,7 +152,47 @@ public class Board {
    * Creates a collection of all neighboring Boards
    * @return all the neighbors of the current instance
    */
-  public Iterable<Board> neighbours() {
+  public Iterable<Board> neighbors() {
+    Queue<Board> availableMoves = new Queue<Board>();
+    
+    int zeroRow = 0;
+    int zeroCol = 0;
+    
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (blocks[i][j] == 0) {
+          zeroRow = i;
+          zeroCol = j;
+        }
+      }
+    }
+    
+    // Vertical neighbors
+    if (zeroRow > 0 && zeroRow < n) {
+      // both vertical neighbors
+    }
+    else {
+      if (zeroRow == 0) {
+        // neighbor below
+      }
+      else {
+        // neighbor above
+      }
+    }
+    
+    // Horizontal neighbors
+    if (zeroCol > 0 && zeroCol < n) {
+      //
+    }
+    else {
+      if (zeroCol == 0) {
+        // neighbor to the right
+      }
+      else {
+        // neighbor to the left
+      }
+    }
+    
     return null;
   }
   
@@ -211,6 +250,23 @@ public class Board {
     if (value < 1 || value > this.n * this.n) throw new java.lang.IllegalArgumentException("The given value should be on the board.");
     
     return (value - 1) % this.n;
+  }
+  
+  /**
+   * Copy a 2-dimensional array
+   * @param givenArray the array to be copied
+   * @return a new array, equal to the given
+   */
+  private int[][] copyArray(int[][] givenArray) {
+    int[][] result = new int[givenArray.length][givenArray[0].length];
+    
+    for (int i = 0; i < result.length; i++) {
+      for (int j = 0; j < result[i].length; j++) {
+        result[i][j] = givenArray[i][j];
+      }
+    }
+    
+    return result;
   }
   
   public static void main(String[] args) {
