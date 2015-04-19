@@ -113,7 +113,14 @@ public class Board {
    * @return true if both boards are identical (same blocks
    * in the same positions), false otherwise
    */
-  public boolean equals(Board that) {
+  public boolean equals(Object x) {
+    
+    if (this == x) return true;
+    if (x == null) return false;
+    if (this.getClass() != x.getClass()) return false;
+    
+    Board that = (Board) x;
+    
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < n; j++) {
         if (this.blocks[i][j] != that.blocks[i][j])
