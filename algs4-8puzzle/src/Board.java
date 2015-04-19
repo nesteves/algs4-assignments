@@ -153,6 +153,32 @@ public class Board {
     return 0;
   }
   
+  /**
+   * Computes the row where the given value should
+   * be on a goal board
+   * @param value the value for which the goal row
+   * is to be found
+   * @return the goal row for the given value
+   */
+  private int valueGoalRow(int value) {
+    if (value < 1 || value > this.n * this.n) throw new java.lang.IllegalArgumentException("The given value should be on the board.");
+    
+    return value / this.n;
+  }
+  
+  /**
+   * Computes the column where the given value should
+   * be on a goal board
+   * @param value the value for which the goal column
+   * is to be found
+   * @return the goal column for the given value
+   */
+  private int valueGoalColumn(int value) {
+    if (value < 1 || value > this.n * this.n) throw new java.lang.IllegalArgumentException("The given value should be on the board.");
+    
+    return value % this.n - 1;
+  }
+  
   public static void main(String[] args) {
     
     Board testBoard = new Board(new int[][] {
