@@ -125,6 +125,17 @@ public class BoardTest {
     int expected = 6;
     
     assertEquals("The hamming distance for the given board should be " + expected + ".", expected, testBoard.hamming());
+    
+    int[][] testInput2 = new int[][]{
+        {8,1,3},
+        {4,0,2},
+        {7,6,5}
+    };
+    
+    Board testBoard2 = new Board(testInput2);
+    int expected2 = 5;
+    
+    assertEquals("The hamming distance for the given board should be " + expected2 + ".", expected2, testBoard2.hamming());
   }
   
   @Test
@@ -150,5 +161,16 @@ public class BoardTest {
     int expected2 = 6;
     
     assertEquals("The manhattan distance for the given board should be " + expected2 + ".", expected2, testBoard2.manhattan());
+    
+    int[][] testInput3 = new int[][]{
+        {8,1,3},
+        {4,0,2},
+        {7,6,5}
+    };
+    
+    Board testBoard3 = new Board(testInput3);
+    int expected3 = 10;
+    
+    assertEquals("The manhattan distance for the given board should be " + expected3 + ".", expected3, testBoard3.manhattan());
   }
 }
