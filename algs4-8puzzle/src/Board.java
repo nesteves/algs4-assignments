@@ -67,7 +67,16 @@ public class Board {
    * from each block to its goal position
    */
   public int manhattan() {
-    return 0;
+    int result = 0;
+    
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (blocks[i][j] != 0)
+          result += Math.abs(i - valueGoalRow(blocks[i][j])) + Math.abs(j - valueGoalColumn(blocks[i][j]));
+      }
+    }
+    
+    return result;
   }
   
   /**
@@ -163,7 +172,7 @@ public class Board {
   private int valueGoalRow(int value) {
     if (value < 1 || value > this.n * this.n) throw new java.lang.IllegalArgumentException("The given value should be on the board.");
     
-    return value / this.n;
+    return (value - 1) / this.n;
   }
   
   /**
@@ -176,7 +185,7 @@ public class Board {
   private int valueGoalColumn(int value) {
     if (value < 1 || value > this.n * this.n) throw new java.lang.IllegalArgumentException("The given value should be on the board.");
     
-    return value % this.n - 1;
+    return (value - 1) % this.n;
   }
   
   public static void main(String[] args) {
