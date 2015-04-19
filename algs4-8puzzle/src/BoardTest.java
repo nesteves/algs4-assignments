@@ -42,7 +42,7 @@ public class BoardTest {
     String expected = "3\n 1 2 3\n 4 5 6\n 7 8 0";
     
     assertEquals("The output of toString() should be correct.",
-        testBoard.toString(), expected);
+        expected, testBoard.toString());
   }
   
   @Test
@@ -111,5 +111,44 @@ public class BoardTest {
     Board testBoard2 = new Board(testInput2);
     
     assertFalse("The 2 boards should be different.", testBoard.equals(testBoard2));
+  }
+  
+  @Test
+  public void testHammingDistance() {
+    int[][] testInput = new int[][]{
+        {3,2,1},
+        {4,6,5},
+        {8,7,0}
+    };
+    
+    Board testBoard = new Board(testInput);
+    int expected = 6;
+    
+    assertEquals("The hamming distance for the given board should be " + expected + ".", expected, testBoard.hamming());
+  }
+  
+  @Test
+  public void testManhattanDistance() {
+    int[][] testInput = new int[][]{
+        {3,2,1},
+        {4,6,5},
+        {8,7,0}
+    };
+    
+    Board testBoard = new Board(testInput);
+    int expected = 8;
+    
+    assertEquals("The manhattan distance for the given board should be " + expected + ".", expected, testBoard.manhattan());
+    
+    int[][] testInput2 = new int[][]{
+        {1,2,6},
+        {8,5,3},
+        {7,4,0}
+    };
+    
+    Board testBoard2 = new Board(testInput2);
+    int expected2 = 6;
+    
+    assertEquals("The manhattan distance for the given board should be " + expected2 + ".", expected2, testBoard2.manhattan());
   }
 }
