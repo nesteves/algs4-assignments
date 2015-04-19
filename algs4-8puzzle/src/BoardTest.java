@@ -204,4 +204,70 @@ public class BoardTest {
     
     assertEquals("The resulting board should have the first 2 values after the 0 in the first row swapped.", expectedBoard2, testBoard2.twin());
   }
+  
+  @Test
+  public void testNeighbors() {
+    Board testBoardA = new Board(new int [][]{
+        {0,1,2,3},
+        {4,5,6,7},
+        {8,9,10,11},
+        {12,13,14,15}
+    });
+    
+    Board neighborA1 = new Board(new int [][]{
+        {1,0,2,3},
+        {4,5,6,7},
+        {8,9,10,11},
+        {12,13,14,15}
+    });
+
+    Board neighborA2 = new Board(new int [][]{
+        {4,1,2,3},
+        {0,5,6,7},
+        {8,9,10,11},
+        {12,13,14,15}
+    });
+    
+    for (Board b : testBoardA.neighbors()) {
+      if (!b.equals(neighborA1) && !b.equals(neighborA2)) {
+        fail("There is at least one neighbor of the Board A missing from the returned iterable.");
+      }
+    }
+    
+    Board testBoardB = new Board(new int[][]{
+        {1,2,3},
+        {4,0,6},
+        {7,5,8}
+    });
+    
+    Board neighborB1 = new Board(new int[][]{
+        {1,0,3},
+        {4,2,6},
+        {7,5,8}
+    });
+    
+    Board neighborB2 = new Board(new int[][]{
+        {1,2,3},
+        {4,6,0},
+        {7,5,8}
+    });
+    
+    Board neighborB3 = new Board(new int[][]{
+        {1,2,3},
+        {4,5,6},
+        {7,0,8}
+    });
+    
+    Board neighborB4 = new Board(new int[][]{
+        {1,2,3},
+        {0,4,6},
+        {7,5,8}
+    });
+    
+    for (Board b : testBoardA.neighbors()) {
+      if (!b.equals(neighborB1) && !b.equals(neighborB2) && !b.equals(neighborB3) && !b.equals(neighborB4)) {
+        fail("There is at least one neighbor of the Board B missing from the returned iterable.");
+      }
+    }
+  }
 }
