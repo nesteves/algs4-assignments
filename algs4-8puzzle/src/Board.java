@@ -1,3 +1,5 @@
+import java.util.Queue;
+
 
 /**
  * Represents the typical 8-puzzle board
@@ -104,7 +106,23 @@ public class Board {
    * blocks in the same row
    */
   public Board twin() {
-    return null;
+    int[][] twinArr = new int[n][n];
+    boolean valuesSwapped = false;
+    
+    for (int i = 0; i < n; i++) {
+      for (int j = 0; j < n; j++) {
+        if (!valuesSwapped && j > 0 && blocks[i][j-1] != 0) {
+          twinArr[i][j-1] = blocks[i][j];
+          twinArr[i][j] = blocks[i][j-1];
+          valuesSwapped = true;
+        }
+        else {
+          twinArr[i][j] = blocks[i][j];
+        }
+      }
+    }
+    
+    return new Board(twinArr);
   }
   
   /**
