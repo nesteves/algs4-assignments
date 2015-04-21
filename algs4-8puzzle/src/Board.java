@@ -157,9 +157,11 @@ public class Board {
     
     int zeroRow = 0;
     int zeroCol = 0;
+    int[][] referenceBlocks = new int[n][n];
     
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < n; j++) {
+        referenceBlocks[i][j] = blocks[i][j];
         if (blocks[i][j] == 0) {
           zeroRow = i;
           zeroCol = j;
@@ -169,31 +171,37 @@ public class Board {
     
     // Vertical neighbors
     if (zeroRow > 0 && zeroRow < n) {
-      // both vertical neighbors
+      availableMoves.enqueue(getNeighbor(referenceBlocks, zeroRow, zeroCol, zeroRow - 1, zeroCol));
+      availableMoves.enqueue(getNeighbor(referenceBlocks, zeroRow, zeroCol, zeroRow + 1, zeroCol));
     }
     else {
       if (zeroRow == 0) {
         // neighbor below
+        availableMoves.enqueue(getNeighbor(referenceBlocks, zeroRow, zeroCol, zeroRow + 1, zeroCol));
       }
       else {
         // neighbor above
+        availableMoves.enqueue(getNeighbor(referenceBlocks, zeroRow, zeroCol, zeroRow - 1, zeroCol));
       }
     }
     
     // Horizontal neighbors
     if (zeroCol > 0 && zeroCol < n) {
-      //
+      availableMoves.enqueue(getNeighbor(referenceBlocks, zeroRow, zeroCol, zeroRow, zeroCol - 1));
+      availableMoves.enqueue(getNeighbor(referenceBlocks, zeroRow, zeroCol, zeroRow, zeroCol + 1));
     }
     else {
       if (zeroCol == 0) {
         // neighbor to the right
+        availableMoves.enqueue(getNeighbor(referenceBlocks, zeroRow, zeroCol, zeroRow, zeroCol + 1));
       }
       else {
         // neighbor to the left
+        availableMoves.enqueue(getNeighbor(referenceBlocks, zeroRow, zeroCol, zeroRow, zeroCol - 1));
       }
     }
     
-    return null;
+    return availableMoves;
   }
   
   /**
@@ -253,20 +261,25 @@ public class Board {
   }
   
   /**
-   * Copy a 2-dimensional array
-   * @param givenArray the array to be copied
-   * @return a new array, equal to the given
+   * Switches 2 values in a 2-dimensional array, builds a new Board, resets the original array
+   * and returns the newly created Board
+   * @param givenArray the array on which to perform the switch
+   * @param rowA the row index of the first value
+   * @param colA the column index of the first value
+   * @param rowB the row index of the second value
+   * @param colB colA the column index of the second value
    */
-  private int[][] copyArray(int[][] givenArray) {
-    int[][] result = new int[givenArray.length][givenArray[0].length];
+  private Board getNeighbor(int[][] givenArray, int rowA, int colA, int rowB, int colB) {
+    int aux = givenArray[rowA][colA];
+    givenArray[rowA][colA] = givenArray[rowB][colB];
+    givenArray[rowB][colB] = aux;
     
-    for (int i = 0; i < result.length; i++) {
-      for (int j = 0; j < result[i].length; j++) {
-        result[i][j] = givenArray[i][j];
-      }
-    }
+    Board neighbor = new Board(givenArray);
     
-    return result;
+    givenArray[rowB][colB] = givenArray[rowA][colA];
+    givenArray[rowA][colA] = aux;
+    
+    return neighbor;
   }
   
   public static void main(String[] args) {
