@@ -264,7 +264,7 @@ public class BoardTest {
         {7,5,8}
     });
     
-    for (Board b : testBoardA.neighbors()) {
+    for (Board b : testBoardB.neighbors()) {
       if (!b.equals(neighborB1) && !b.equals(neighborB2) && !b.equals(neighborB3) && !b.equals(neighborB4)) {
         fail("There is at least one neighbor of the Board B missing from the returned iterable.");
       }
