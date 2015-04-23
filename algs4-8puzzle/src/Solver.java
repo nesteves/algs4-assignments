@@ -10,7 +10,7 @@ public class Solver {
    * @param initial the initial Board
    */
   public Solver(Board initial) {
-    
+    throw new java.lang.UnsupportedOperationException("Not implemented.");
   }
   
   /**
@@ -18,7 +18,7 @@ public class Solver {
    * solvable, false otherwise
    */
   public boolean isSolvable() {
-    return false;
+    throw new java.lang.UnsupportedOperationException("Not implemented.");
   }
   
   /**
@@ -28,7 +28,7 @@ public class Solver {
    * the initial Board, -1 if it is unsolvable
    */
   public int moves() {
-    return 0;
+    throw new java.lang.UnsupportedOperationException("Not implemented.");
   }
   
   /**
@@ -37,7 +37,7 @@ public class Solver {
    * Board, null if unsolvable
    */
   public Iterable<Board> solution() {
-    return null;
+    throw new java.lang.UnsupportedOperationException("Not implemented.");
   }
   
   public static void main(String[] args) {
