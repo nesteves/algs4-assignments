@@ -50,10 +50,19 @@ public class Solver {
   public Solver(Board initial) {
     SearchNode mainNode = new SearchNode(null, initial, 0);
     MinPQ<SearchNode> mainPQ = new MinPQ<SearchNode>(new SearchNodeComparator());
+    mainPQ.insert(mainNode);
     
     SearchNode twinNode = new SearchNode(null, initial.twin(), 0);
+    MinPQ<SearchNode> twinPQ = new MinPQ<SearchNode>(new SearchNodeComparator());
+    mainPQ.insert(twinNode);
     
+    while (!mainNode.boardPosition.isGoal() && !twinNode.boardPosition.isGoal()) {
+      mainNode = processQueue(mainPQ);
+      twinNode = processQueue(twinPQ);
+    }
     
+    System.out.println(mainNode.boardPosition);
+    System.out.println(twinNode.boardPosition);
   }
   
   /**
@@ -81,6 +90,23 @@ public class Solver {
    */
   public Iterable<Board> solution() {
     throw new java.lang.UnsupportedOperationException("Not implemented.");
+  }
+  
+  /**
+   * Takes the best available move from the queue and inserts the next moves
+   * @param nodeQueue the MinPQ of available moves
+   * @return the selected move
+   */
+  private SearchNode processQueue(MinPQ<SearchNode> nodeQueue) {
+    SearchNode nextMove = (SearchNode) nodeQueue.delMin();
+    
+    for (Board b : nextMove.boardPosition.neighbors()) {
+      if (!b.equals(nextMove.previousNode.boardPosition)) {
+        nodeQueue.insert(new SearchNode(nextMove, b, nextMove.totalMoves++));
+      }
+    }
+    
+    return nextMove;
   }
   
   public static void main(String[] args) {
