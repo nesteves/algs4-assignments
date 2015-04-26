@@ -228,8 +228,8 @@ public class BoardTest {
         {12,13,14,15}
     });
     
-    for (Board b : testBoardA.neighbors()) {
-      if (!b.equals(neighborA1) && !b.equals(neighborA2)) {
+    for (Board a : testBoardA.neighbors()) {
+      if (!a.equals(neighborA1) && !a.equals(neighborA2)) {
         fail("There is at least one neighbor of the Board A missing from the returned iterable.");
       }
     }
@@ -267,6 +267,30 @@ public class BoardTest {
     for (Board b : testBoardB.neighbors()) {
       if (!b.equals(neighborB1) && !b.equals(neighborB2) && !b.equals(neighborB3) && !b.equals(neighborB4)) {
         fail("There is at least one neighbor of the Board B missing from the returned iterable.");
+      }
+    }
+    
+    Board testBoardC = new Board(new int [][]{
+        {1,2,3},
+        {4,5,6},
+        {8,7,0}
+    });
+    
+    Board neighborC1 = new Board(new int [][]{
+        {1,2,3},
+        {4,5,0},
+        {8,7,6}
+    });
+
+    Board neighborC2 = new Board(new int [][]{
+        {1,2,3},
+        {4,5,6},
+        {8,0,7}
+    });
+    
+    for (Board c : testBoardC.neighbors()) {
+      if (!c.equals(neighborC1) && !c.equals(neighborC2)) {
+        fail("There is at least one neighbor of the Board A missing from the returned iterable.");
       }
     }
   }
