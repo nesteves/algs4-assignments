@@ -170,7 +170,7 @@ public class Board {
     }
     
     // Vertical neighbors
-    if (zeroRow > 0 && zeroRow < n) {
+    if (zeroRow > 0 && zeroRow < n - 1) {
       availableMoves.enqueue(getNeighbor(referenceBlocks, zeroRow, zeroCol, zeroRow - 1, zeroCol));
       availableMoves.enqueue(getNeighbor(referenceBlocks, zeroRow, zeroCol, zeroRow + 1, zeroCol));
     }
@@ -186,7 +186,7 @@ public class Board {
     }
     
     // Horizontal neighbors
-    if (zeroCol > 0 && zeroCol < n) {
+    if (zeroCol > 0 && zeroCol < n - 1) {
       availableMoves.enqueue(getNeighbor(referenceBlocks, zeroRow, zeroCol, zeroRow, zeroCol - 1));
       availableMoves.enqueue(getNeighbor(referenceBlocks, zeroRow, zeroCol, zeroRow, zeroCol + 1));
     }
