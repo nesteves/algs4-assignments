@@ -5,6 +5,22 @@
 public class Solver {
   
   /**
+   * Represents a game tree search node
+   */
+  private class searchNode {
+    
+    searchNode previousNode;
+    Board boardPosition;
+    int totalMoves;
+    
+    public searchNode(searchNode previous, Board position, int moves) {
+      this.previousNode = previous;
+      this.boardPosition = position;
+      this.totalMoves = moves;
+    }
+  }
+  
+  /**
    * Finds a solution to the given Board
    * using the A* search algorithm
    * @param initial the initial Board
