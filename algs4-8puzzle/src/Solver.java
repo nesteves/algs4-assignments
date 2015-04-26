@@ -107,7 +107,7 @@ public class Solver {
     
     for (Board b : nextMove.boardPosition.neighbors()) {
       if (nextMove.previousNode == null || !b.equals(nextMove.previousNode.boardPosition)) {
-        nodeQueue.insert(new SearchNode(nextMove, b, nextMove.totalMoves++));
+        nodeQueue.insert(new SearchNode(nextMove, b, nextMove.totalMoves + 1));
       }
     }
     
