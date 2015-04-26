@@ -92,7 +92,9 @@ public class Solver {
    * Board, null if unsolvable
    */
   public Iterable<Board> solution() {
-    return moveSequence;
+    if (moveSequence.size() > 0)
+      return moveSequence;
+    return null;
   }
   
   /**
