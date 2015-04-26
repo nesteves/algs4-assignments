@@ -1,3 +1,5 @@
+import java.util.Comparator;
+
 
 /**
  * Instantiates and solves a Board
@@ -7,17 +9,39 @@ public class Solver {
   /**
    * Represents a game tree search node
    */
-  private class searchNode {
+  private class SearchNode {
     
-    searchNode previousNode;
+    SearchNode previousNode;
     Board boardPosition;
     int totalMoves;
     
-    public searchNode(searchNode previous, Board position, int moves) {
+    public SearchNode(SearchNode previous, Board position, int moves) {
       this.previousNode = previous;
       this.boardPosition = position;
       this.totalMoves = moves;
     }
+    
+    /**
+     * Provides a method to compare 2 different search nodes in respect
+     * to the manhattan distance the boards they represent have
+     */
+    public final Comparator<SearchNode> MANHATTAN_DIST_ORDER = new Comparator<SearchNode>() {
+      
+      public int compare(SearchNode n1, SearchNode n2) {
+        int mDist1 = n1.boardPosition.manhattan();
+        int mDist2 = n2.boardPosition.manhattan();
+        
+        if (mDist1 > mDist2) {
+          return 1;
+        }
+        else if (mDist1 == mDist2) {
+          return 0;
+        }
+        else {
+          return -1;
+        }
+      }
+    };
   }
   
   /**
@@ -26,7 +50,12 @@ public class Solver {
    * @param initial the initial Board
    */
   public Solver(Board initial) {
-    throw new java.lang.UnsupportedOperationException("Not implemented.");
+    SearchNode mainNode = new SearchNode(null, initial, 0);
+    MinPQ<SearchNode> mainPQ = new MinPQ<SearchNode>();
+    
+    SearchNode twinNode = new SearchNode(null, initial.twin(), 0);
+    
+    
   }
   
   /**
