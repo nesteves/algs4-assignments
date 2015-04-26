@@ -138,6 +138,8 @@ public class Board {
     
     Board that = (Board) x;
     
+    if (this.dimension() != that.dimension()) return false;
+    
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < n; j++) {
         if (this.blocks[i][j] != that.blocks[i][j])
