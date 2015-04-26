@@ -29,8 +29,8 @@ public class Solver {
    */
   private static class SearchNodeComparator implements Comparator<SearchNode> {
     public int compare(SearchNode n1, SearchNode n2) {
-      int mDist1 = n1.boardPosition.manhattan();
-      int mDist2 = n2.boardPosition.manhattan();
+      int mDist1 = n1.boardPosition.manhattan() + n1.totalMoves;
+      int mDist2 = n2.boardPosition.manhattan() + n2.totalMoves;
       
       if (mDist1 > mDist2) {
         return 1;
