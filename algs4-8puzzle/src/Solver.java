@@ -5,6 +5,8 @@ import java.util.Comparator;
  */
 public class Solver {
   
+  private Stack<Board> moveSequence = new Stack<Board>();
+  
   /**
    * Represents a game tree search node
    */
@@ -48,21 +50,22 @@ public class Solver {
    * @param initial the initial Board
    */
   public Solver(Board initial) {
+    
     SearchNode mainNode = new SearchNode(null, initial, 0);
     MinPQ<SearchNode> mainPQ = new MinPQ<SearchNode>(new SearchNodeComparator());
     mainPQ.insert(mainNode);
     
     SearchNode twinNode = new SearchNode(null, initial.twin(), 0);
     MinPQ<SearchNode> twinPQ = new MinPQ<SearchNode>(new SearchNodeComparator());
-    mainPQ.insert(twinNode);
+    twinPQ.insert(twinNode);
     
     while (!mainNode.boardPosition.isGoal() && !twinNode.boardPosition.isGoal()) {
       mainNode = processQueue(mainPQ);
       twinNode = processQueue(twinPQ);
     }
     
-    System.out.println(mainNode.boardPosition);
-    System.out.println(twinNode.boardPosition);
+    if (mainNode.boardPosition.isGoal())
+      buildMoveSequence(mainNode);
   }
   
   /**
@@ -70,7 +73,7 @@ public class Solver {
    * solvable, false otherwise
    */
   public boolean isSolvable() {
-    throw new java.lang.UnsupportedOperationException("Not implemented.");
+    return moveSequence.size() > 0;
   }
   
   /**
@@ -80,7 +83,7 @@ public class Solver {
    * the initial Board, -1 if it is unsolvable
    */
   public int moves() {
-    throw new java.lang.UnsupportedOperationException("Not implemented.");
+    return moveSequence.size() - 1;
   }
   
   /**
@@ -89,7 +92,7 @@ public class Solver {
    * Board, null if unsolvable
    */
   public Iterable<Board> solution() {
-    throw new java.lang.UnsupportedOperationException("Not implemented.");
+    return moveSequence;
   }
   
   /**
@@ -101,7 +104,7 @@ public class Solver {
     SearchNode nextMove = (SearchNode) nodeQueue.delMin();
     
     for (Board b : nextMove.boardPosition.neighbors()) {
-      if (!b.equals(nextMove.previousNode.boardPosition)) {
+      if (nextMove.previousNode == null || !b.equals(nextMove.previousNode.boardPosition)) {
         nodeQueue.insert(new SearchNode(nextMove, b, nextMove.totalMoves++));
       }
     }
@@ -109,7 +112,40 @@ public class Solver {
     return nextMove;
   }
   
+  /**
+   * Takes the search node representing the final
+   * Board position builds the sequence of moves
+   * @param finalPosition
+   */
+  private void buildMoveSequence(SearchNode finalPosition) {
+    SearchNode currentNode = finalPosition;
+    
+    while (currentNode != null) {
+      moveSequence.push(currentNode.boardPosition);
+      currentNode = currentNode.previousNode;
+    }
+  }
+  
   public static void main(String[] args) {
-    System.out.println("COMPILES!");
+    // create initial board from file
+    In in = new In(args[0]);
+    int N = in.readInt();
+    int[][] blocks = new int[N][N];
+    for (int i = 0; i < N; i++)
+      for (int j = 0; j < N; j++)
+        blocks[i][j] = in.readInt();
+    Board initial = new Board(blocks);
+
+    // solve the puzzle
+    Solver solver = new Solver(initial);
+
+    // print solution to standard output
+    if (!solver.isSolvable())
+      StdOut.println("No solution possible");
+    else {
+      StdOut.println("Minimum number of moves = " + solver.moves());
+      for (Board board : solver.solution())
+        StdOut.println(board);
+    }
   }
 }
