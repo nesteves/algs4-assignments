@@ -110,7 +110,7 @@ public class Board {
     
     for (int i = 0; i < n; i++) {
       for (int j = 0; j < n; j++) {
-        if (!valuesSwapped && j > 0 && blocks[i][j-1] != 0) {
+        if (!valuesSwapped && j > 0 && blocks[i][j-1] != 0 && blocks[i][j] != 0) {
           twinArr[i][j-1] = blocks[i][j];
           twinArr[i][j] = blocks[i][j-1];
           valuesSwapped = true;
