@@ -1,6 +1,5 @@
 import java.util.Comparator;
 
-
 /**
  * Instantiates and solves a Board
  */
@@ -20,28 +19,27 @@ public class Solver {
       this.boardPosition = position;
       this.totalMoves = moves;
     }
-    
-    /**
-     * Provides a method to compare 2 different search nodes in respect
-     * to the manhattan distance the boards they represent have
-     */
-    public final Comparator<SearchNode> MANHATTAN_DIST_ORDER = new Comparator<SearchNode>() {
+  }
+  
+  /**
+   * Provides a method to compare 2 different search nodes in respect
+   * to the manhattan distance the boards they represent have
+   */
+  private static class SearchNodeComparator implements Comparator<SearchNode> {
+    public int compare(SearchNode n1, SearchNode n2) {
+      int mDist1 = n1.boardPosition.manhattan();
+      int mDist2 = n2.boardPosition.manhattan();
       
-      public int compare(SearchNode n1, SearchNode n2) {
-        int mDist1 = n1.boardPosition.manhattan();
-        int mDist2 = n2.boardPosition.manhattan();
-        
-        if (mDist1 > mDist2) {
-          return 1;
-        }
-        else if (mDist1 == mDist2) {
-          return 0;
-        }
-        else {
-          return -1;
-        }
+      if (mDist1 > mDist2) {
+        return 1;
       }
-    };
+      else if (mDist1 == mDist2) {
+        return 0;
+      }
+      else {
+        return -1;
+      }
+    }
   }
   
   /**
@@ -51,7 +49,7 @@ public class Solver {
    */
   public Solver(Board initial) {
     SearchNode mainNode = new SearchNode(null, initial, 0);
-    MinPQ<SearchNode> mainPQ = new MinPQ<SearchNode>();
+    MinPQ<SearchNode> mainPQ = new MinPQ<SearchNode>(new SearchNodeComparator());
     
     SearchNode twinNode = new SearchNode(null, initial.twin(), 0);
     
