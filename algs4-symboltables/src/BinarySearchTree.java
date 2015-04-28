@@ -4,7 +4,7 @@ import java.util.concurrent.LinkedBlockingQueue;
 /**
  * Implementation of a symbol table using an explicit binary search tree
  */
-public class binarySearchTree<Key extends Comparable<Key>, Value> {
+public class BinarySearchTree<Key extends Comparable<Key>, Value> {
   
   private Node root;
   
