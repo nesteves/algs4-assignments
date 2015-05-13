@@ -6,6 +6,7 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
   
   private static final boolean RED = true;
   private static final boolean BLACK = false;
+  private Node root;
   
   /**
    * Represents a node in the left-leaning red-black tree
@@ -24,7 +25,14 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
    * @return the corresponding value
    */
   public Value get(Key key) {
-    throw new java.lang.UnsupportedOperationException("Not implemented.");
+    Node x = root;
+    while (x != null) {
+      int cmp = key.compareTo(x.key);
+      if (cmp < 0) x = x.left;
+      if (cmp > 0) x = x.right;
+      else return x.value;
+    }
+    return null;
   }
   
   /**
