@@ -89,7 +89,14 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
    * @return the node that now has a red link to its right
    */
   private Node rotateRight(Node n) {
-    throw new java.lang.UnsupportedOperationException("Not implemented.");
+    Node x = n.left;
+    n.left = x.right;
+    x.right = n;
+    x.color = n.color;
+    n.color = RED;
+    x.N = n.N;
+    n.N = 1 + size(n.left) + size(n.right);
+    return x;
   }
   
   /**
