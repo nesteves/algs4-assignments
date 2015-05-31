@@ -14,9 +14,17 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
   private class Node {
     Key key;
     Value value;
+    int N; // total nodes in the subtree
     Node left;
     Node right;
-    boolean color; 
+    boolean color;
+    
+    Node(Key key, Value value, int N, boolean color) {
+      this.key = key;
+      this.value = value;
+      this.N = N;
+      this.color = color;
+    }
   }
   
   /**
