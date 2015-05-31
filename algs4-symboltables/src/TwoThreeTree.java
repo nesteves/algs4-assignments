@@ -44,6 +44,27 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
   }
   
   /**
+   * Method used to get the size of the
+   * entire tree
+   * @return the size of the entire 2-3 Tree
+   */
+  public int size() {
+    return size(root);
+  }
+  
+  /**
+   * Method used to get the size of a
+   * subtree
+   * @param n root of the subtree
+   * @return the size of the subtree rooted on node
+   * n
+   */
+  public int size(Node n) {
+    if (n == null) return 0;
+    return n.N;
+  }
+  
+  /**
    * Makes the tree "lean to the left" for
    * the given node. It affects a 3-node
    * @param n he node that has a red link to its right,
@@ -52,7 +73,14 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
    * "leaning left"
    */
   private Node rotateLeft(Node n) {
-    throw new java.lang.UnsupportedOperationException("Not implemented.");
+    Node x = n.right;
+    n.right = x.left;
+    x.left = n;
+    x.color = n.color;
+    n.color = RED;
+    x.N = n.N;
+    n.N = 1 + size(n.left) + size(n.right);
+    return x;
   }
   
   /**
