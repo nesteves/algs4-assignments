@@ -106,7 +106,9 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
    * @param n the node for which to switch the link colors
    */
   private void flipColors(Node n) {
-    throw new java.lang.UnsupportedOperationException("Not implemented.");
+    n.color = RED;
+    n.left.color = BLACK;
+    n.right.color = BLACK;
   }
   
   /**
@@ -120,5 +122,12 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
   private boolean isRed(Node n) {
     if (n == null) return false;
     return n.color == RED;
+  }
+  
+  /**
+   * Main method used to test the class itself
+   */
+  public static void main(String[] args) {
+    
   }
 }
