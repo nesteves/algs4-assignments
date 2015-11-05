@@ -65,6 +65,54 @@ public class TwoThreeTree<Key extends Comparable<Key>, Value> {
   }
   
   /**
+   * Method used to insert a key-value pair
+   * into the tree. If the key already exists,
+   * its value is updated, otherwise the key is
+   * inserted and the tree grows accordingly
+   * @param key
+   * @param value
+   */
+  public void put(Key key, Value value) {
+    root = put(root, key, value);
+    root.color = BLACK;
+  }
+  
+  /**
+   * Recursive method used to traverse the tree,
+   * find where to insert the key-value pair and
+   * perform the necessary rotations and flips
+   * in order to maintain perfect red-black balance
+   * @param n the current node being analyzed
+   * @param key 
+   * @param value
+   * @return
+   */
+  private Node put(Node n, Key key, Value value) {
+    
+    // Insert the key-value pair when a null link is found
+    if (n == null)
+      return new Node(key, value, 1, RED);
+    
+    int cmp = key.compareTo(n.key);
+    if (cmp < 0)
+      n.left = put(n.left, key, value);
+    else if (cmp > 0)
+      n.right = put(n.right, key, value);
+    else
+      n.value = value;
+    
+    if (isRed(n.right) && !isRed(n.left))
+      n = rotateLeft(n);
+    if (isRed(n.left) && isRed(n.left.left))
+      n = rotateRight(n);
+    if (isRed(n.left) && isRed(n.right))
+      flipColors(n);
+    
+    n.N = size(n.left) + size(n.right) + 1;
+    return n;
+  }
+  
+  /**
    * Makes the tree "lean to the left" for
    * the given node. It affects a 3-node
    * @param n he node that has a red link to its right,
